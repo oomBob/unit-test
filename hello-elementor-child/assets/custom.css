@@ -1,0 +1,1562 @@
+/*
+ *  custom style
+*/
+
+/* navigation menu - start */
+
+@media(max-width:382px){
+	.oom-mobile-menu-container-box a.elementor-button {
+		padding: 10px !important;
+		border-radius: 5px;
+	}
+}
+@media (max-width:767px) and (min-width:418.99px){
+	.oom-custom-btn-wo-text span.elementor-button-icon {
+		display: none;
+	}
+}
+@media(max-width:418px){
+	.oom-custom-btn-wo-text span.elementor-button-text {
+		display: none;
+	}
+	.oom-book-now-wo-text .elementor-button-text {
+		font-size: 12px ! important;
+	}
+	.oom-custom-btn-wo-text span.elementor-button-icon svg {
+		font-size: 19px;
+	}
+	.oom-mobile-menu svg {
+		font-size: 18px;
+	}
+}
+
+.oom-main-menu ul.elementor-nav-menu--dropdown a {
+	border-inline-start: none;
+}
+
+.oom-main-menu ul.sub-menu {
+	width: 207px !important;
+}
+
+.oom-main-menu ul.sub-menu a {
+	word-break: break-word !important;
+    white-space: normal;
+}
+
+.oom-nav-book-btn .elementor-button {
+  background: linear-gradient(90deg, #00148C, #00148C, #1478F0, #63F0C7);
+  background-size: 300% auto;
+  transition: .5s;
+  &:hover {
+    background-position: 99% 0;
+  }
+}
+
+/* book now button - start */
+
+.oom-nav-book-dropdown-menu {
+	display: none;
+	position: absolute;
+    top: 120%;
+    min-width: 100%;
+    z-index: 100;
+}
+
+/* book now button - end */
+
+/* navigation menu - end */
+
+/* custom button animation - start */
+
+.oom-custom-btn, #oom-custom-form-btn {
+    position: relative;
+    display: block;
+	border-radius: 10px;
+    color: #fff;
+    overflow: hidden;
+    background: none;
+    z-index: 1;
+}
+
+.oom-custom-btn::before, #oom-custom-form-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500%;
+    height: 900%;
+    background: linear-gradient(135deg, #63f0c7 43%, #1478f0 65%);
+    transform: translate(-50%, -50%) rotate(0deg);
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.oom-custom-btn:hover::before, #oom-custom-form-btn:hover::before {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.oom-custom-btn, #oom-custom-form-btn {
+    position: relative;
+    z-index: 1;
+}
+
+.oom-custom-btn span, #oom-custom-form-btn span {
+    position: relative;
+    z-index: 2;
+} 
+
+/* custom button animation - end */
+
+/* breadcrumb navigation - start */
+
+.oom-nav-breadcrumb .elementor-icon-list-item:after,
+.oom-nav-breadcrumb-black .elementor-icon-list-item:after
+{
+	transform: rotate(16deg);
+}
+
+.oom-nav-breadcrumb li:last-child span.elementor-icon-list-text {
+    color: #ffffff !important;
+}
+
+.oom-nav-breadcrumb .elementor-icon-list-item:is(:nth-last-child(2)):after {
+    border-color: #ffffff !important;
+}
+
+.oom-nav-breadcrumb-black li:last-child span.elementor-icon-list-text {
+    color: #000000 !important;
+}
+
+.oom-nav-breadcrumb-black .elementor-icon-list-item:is(:nth-last-child(2)):after {
+    border-color: #000000 !important;
+}
+
+
+
+/* breadcrumb navigation - end */
+
+/* Request for quotation popup - start */
+
+.oom-quote-popup {
+	top:145px;
+}
+
+.oom-quote-popup .dialog-lightbox-close-button {
+    display: none !important;
+}
+
+.oom-popup-quotation-form span.oom-form-label {
+	font-family: "Poppins", Sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color:#2E2E2ECC;
+}
+
+.oom-popup-quotation-form .elementor-field-subgroup > * {
+	flex: 0 0 50%;
+	box-sizing: border-box;
+}
+
+.oom-popup-quotation-form .elementor-field-subgroup {
+	row-gap: 12px;
+}
+
+.oom-popup-quotation-form .elementor-field-option label.elementor-field-label {
+	align-items: flex-start;
+}
+
+.oom-popup-quotation-form .elementor-field-option .elementor-field-label {
+	gap: 12px !important;
+}
+
+.oom-popup-quotation-form .elementor-field-option label {
+	font-size: 16px;
+	line-height: 26px;
+	color: #2E2E2E80;
+}
+
+.oom-popup-quotation-form input[type="checkbox"] {
+    margin-top: 6px !important;
+}
+
+.oom-popup-quotation-form.elementor-widget-oom-elementor-form {
+    max-height: 700px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 20px;
+}
+
+
+.oom-popup-quotation-form button#oom-custom-form-btn {
+    margin-top: 20px;
+}
+
+.oom-popup-quotation-form .elementor-subgroup-inline {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.oom-popup-quotation-form button.iti__selected-country {
+    padding: 0px;
+}
+
+@media (max-width: 1440px) {
+	.oom-popup-quotation-form.elementor-widget-oom-elementor-form {
+		max-height: 60vh;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+}
+
+@media (min-width: 809px) and (max-width: 1024px) {
+	
+	.oom-popup-quotation-form.elementor-widget-oom-elementor-form {
+		max-height: unset;
+		overflow: hidden;
+	}
+	
+}
+
+@media (max-width: 480px) {
+	
+	.oom-popup-quotation-form.elementor-widget-oom-elementor-form {
+		padding-right: 8px;
+	}
+	
+	.oom-popup-quotation-form.elementor-widget-oom-elementor-form {
+		max-height: 75vh;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	
+	.oom-popup-quotation-form .elementor-subgroup-inline {
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+	
+	.oom-popup-quotation-form span.oom-form-label {
+		margin-bottom: -12px;
+	}
+	
+	.oom-popup-quotation-form .iti.iti--allow-dropdown.iti--show-flags {
+		width: 100%;
+	}
+	
+}
+
+
+
+
+@media (min-width: 481px) {
+   .oom-popup-quotation-form .elementor-column.elementor-col-33 {
+        width: 37.5% !important;
+    }
+}
+
+
+
+/* Request for quotation popup - end */
+
+/* contact us page - start */
+
+.oom-contact-list a {
+	color: #1E1E1ECC;
+}
+
+.oom-contact-form span.contact-acceptance-text {
+    font-size: 14px;
+    line-height: 18px;
+    color: #696A6C;
+}
+
+.oom-contact-form button.iti__selected-country {
+    padding: 0px;
+}
+
+@media (max-width: 480px) {
+	.oom-contact-form .iti.iti--allow-dropdown.iti--show-flags {
+		width: 100%;
+	}
+}
+
+/* contact us page - end */
+
+/* testimonial - start */
+
+.oom-testimonial-content {
+    height: 200px;
+	overflow: auto;
+}
+
+.oom-testimonial-content::-webkit-scrollbar {
+	width: 3px;
+}
+
+/* Transparent track */
+.oom-testimonial-content::-webkit-scrollbar-track {
+	background: #0000001A;
+	width: 1px !important;
+}
+
+/* Scrollbar thumb (draggable part) */
+.oom-testimonial-content::-webkit-scrollbar-thumb {
+	background-color: #D0D0D0; /* adjust opacity as needed */
+	border-radius: 4px;
+}
+
+.oom-testimonial-carousel span.swiper-pagination-bullet {
+    width: 50px !important;
+    border-radius: 3px;
+}
+.oom-testimonial-carousel .elementor-widget-theme-post-featured-image {
+    display: none;
+}
+
+
+/* testimonial - end */
+
+/* footer - start */
+
+.footer-links-iconlist li.elementor-icon-list-item a {
+    color: #ffffff;
+}
+
+.oom-footer-form span.oom-newsletter-acceptance-text,
+.oom-footer-form span.oom-newsletter-acceptance-text a
+{
+	color: #ffffff;
+
+}
+
+
+.oom-footer-form .elementor-col-100 {
+    order: 3;
+}
+
+.oom-footer span.elementor-icon-list-text {
+    word-break: break-word;
+}
+
+@media (min-width: 1025px) and (max-width: 1240px) {
+	
+	.oom-footer-form .elementor-col-60 {
+		width: 100% ; 
+	}
+	
+}
+/* footer - end */
+
+@media (max-width: 1280px){
+	
+	.oom-main-menu {
+		display: none !important
+	}
+
+	.oom-mobile-menu {
+		display: block !important;
+	}
+	
+	.oom-mobile-menu a {
+		font-size: 32px !important;
+	}
+	
+	.oom-mobile-menu a svg {
+		height: 24px !important;
+	}
+	
+}
+
+/*
+@media (max-width: 1347px) {
+	.oom-main-menu .menu-item a {
+		font-size: 14px !important;
+	}
+}
+*/
+
+/*
+@media (max-width: 1440px) {
+	
+	.oom-constraint-width {
+        padding-left: 160px;
+		padding-right: 160px;
+		margin: unset;	
+	}
+	
+}*/
+
+.oom-faq-accordian .e-n-accordion-item-title:hover .e-closed svg path{
+	fill: #ffffff !important;
+}
+
+/* promotion page - start */
+.daily-promo-listing-buttons-hide .daily-promo-listing-buttons {
+    display: none;
+}
+
+.custom-bullet {
+  list-style: none;
+  padding-left: 0;
+}
+
+.custom-bullet li {
+  position: relative;
+  padding-left: 30px; /* space for the SVG */
+}
+
+.custom-bullet li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px; /* vertically center depending on line height */
+  width: 20px;
+  height: 20px;
+  background-image: url('/wp-content/uploads/2025/07/green-check_icon.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* promotion page - end */
+
+/* promotion loop item - start */
+
+/*
+.oom-promotion-loop-content {
+	height: 249px;
+	overflow: hidden;
+}
+*/
+
+.oom-promotion-loop-content .jet-listing-dynamic-field__content {
+	
+	overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 7;
+    display: box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+	
+}
+
+.oom-promotion-loop-content ul {
+	margin-bottom: 16px !important;
+}
+
+.oom-promotion-loop-title .elementor-heading-title {
+    overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 1;
+    display: box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+}
+
+.oom-promotions-listing-grid .slick-arrow {
+    border-radius: 20px;
+}
+
+.oom-promotions-listing-grid .jet-slick-dots li {
+    width: 50px !important;
+    border-radius: 3px;
+}
+
+
+.oom-promotions-listing-grid ul.jet-slick-dots {
+    position: absolute;
+    bottom: 7%;
+    width: 50%;
+    right: 0px;
+    left: auto !important;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 2%;
+}
+
+/* promotion loop item - end */ 
+
+/* promotion popup - start */
+.oom-promotion-popup-content-container.e-flex.e-con.e-child {
+	height: 440px;
+	overflow-y: auto;
+}
+
+.oom-promotion-popup-content-container {
+    height: 640px;
+    overflow: auto;
+}
+
+.oom-promotion-popup-content-container::-webkit-scrollbar {
+	width: 8px;
+	-webkit-appearance: none;
+}
+
+/* Track styling */
+.oom-promotion-popup-content-container::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar thumb (draggable part) */
+.oom-promotion-popup-content-container::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover state for better visibility */
+.oom-promotion-popup-content-container::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* iOS Safari specific - force scrollbar to be always visible */
+@supports (-webkit-overflow-scrolling: touch) {
+	.oom-promotion-popup-content-container {
+		-webkit-overflow-scrolling: touch;
+		overflow-y: scroll !important;
+	}
+}
+
+/* promotion popup - end */
+
+/* news and blogs - start */
+
+.oom-latest-news-excerpt .jet-listing-dynamic-field__content {
+	
+	overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 4;
+    display: box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+	
+}
+
+.oom-news-title .elementor-heading-title {
+	
+	overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 2;
+    display: box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+	
+}
+
+
+.oom-post-views .elementor-shortcode {
+	font-size: 14px !important;
+    color: #1E1E1E80 !important;
+}
+
+/* news and blogs - end */
+
+
+/* Monthly / Long Term - Start */
+.oom-extra-saving-box:before {
+	content: "";
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: block; 
+	clip-path: polygon(20% 0%, 95% 0%, 100% 20%, 100% 80%, 100% 100%, 4% 100%, 0 90%, 0 0);
+	background-color: transparent;
+    background-image: linear-gradient(90deg, #0075C5 0%, #000910 100%);
+}
+
+@media(min-width: 991px){
+	.oom-rfq-form .elementor-field-group {
+		display: flex !important;
+		flex-direction: row !important;
+		column-gap: 20px;
+	}
+	.oom-rfq-form .elementor-field-group label {
+		min-width: 200px;
+	}
+	.oom-rfq-form .iti.iti--allow-dropdown.iti--show-flags.iti--inline-dropdown input{ 
+		width: 100%!important;
+	}
+
+	.oom-rfq-form .iti.iti--allow-dropdown.iti--show-flags.iti--inline-dropdown{
+		width: calc(100% - 220px) !important;
+	}
+
+	.oom-rfq-form .elementor-field-subgroup.elementor-subgroup-inline{
+		width: calc(100% - 200px) !important;
+		max-width: fit-content !important;
+	}
+
+	.oom-rfq-form .elementor-field-group input.elementor-field-textual,
+	.oom-rfq-form .elementor-field-group select{
+		width: fit-content;
+	}
+}
+@media (max-width: 991px) {
+	.oom-rfq-form .elementor-field-group label {
+		margin-bottom: 10px;
+	}
+}
+.oom-rfq-form .elementor-field-type-submit {
+    margin: 0 auto;
+}
+
+@media(max-width: 1024px){
+	.oom-extra-saving-box:before {
+		clip-path: polygon(20% 0%, 90% 0%, 105% 20%, 100% 80%, 100% 100%, 5% 100%, 0% 95%, 0% 0%);
+	}
+}
+
+@media (max-width: 560px) {
+    .oom-extra-saving-box:before {
+        clip-path: polygon(20% 0%, 90% 0%, 120% 20%, 100% 80%, 100% 100%, 10% 100%, 0% 95%, 0% 0%);
+    }
+}
+
+
+/* Monthly / Long Term - End */
+
+/* Rental Listing - Start */
+.oomModelSwiper {
+	width: 100%;
+	padding: 20px 0;
+}
+
+.oomModelSwiper .vehicle-slide {
+	text-align: center;
+	padding: 15px;
+}
+
+.oomModelSwiper .vehicle-slide img {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 8px;
+	margin-bottom: 15px;
+}
+
+.oomModelSwiper .no-image-placeholder {
+	width: 100%;
+	height: 200px;
+	background-color: #f5f5f5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	color: #666;
+}
+
+.oomModelSwiper .vehicle-slide h3 {
+	margin: 0;
+	font-size: 18px;
+	color: #333;
+}
+
+
+.oomModelSwiper .swiper-oom-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: #eeeeee;
+    border-top: 1px solid #c7c7c7;
+}
+
+.oomModelSwiper .oom-swiper-button-next, .oomModelSwiper .oom-swiper-button-prev {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+	min-height: 25px;
+    min-width: 25px;
+    width: 25px;
+    height: 25px;
+    background-color: #0c138c;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	cursor: pointer;
+}
+
+.oomModelSwiper .swiper-button-next:after,
+.oomModelSwiper .swiper-button-prev:after {
+	font-size: 16px;
+}
+
+.oomModelSwiper .swiper-pagination {
+	position: relative;
+	top: auto;
+	left: auto;
+	right: auto;
+	width: auto;
+	font-weight: bold;
+	color: #333;
+}
+
+.oomModelSwiper .swiper-slide {
+    text-align: center;
+}
+.oomModelSwiper .swiper-slide h3 {
+    font-size: clamp(1.125rem, 1.075rem + 0.25vw, 1.375rem);
+}
+.oomModelSwiper .swiper-slide img {
+    max-height: 150px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+
+.oom-loop-sub-listing img {
+    width: 15px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+.oom-loop-sub-listing span {
+    color: #8b8b8b;
+}
+
+.oomModelSwiper .swiper-slide {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+	background: #eeeeee;
+}
+
+
+.oomModelSwiper .swiper-pagination.swiper-pagination-custom {
+    align-self: center;
+    margin-top: 10px;
+	font-weight: 400;
+	font-size: 18px;
+}
+
+/* Style the input wrapper and clear button */
+.input-with-clear {
+    position: relative;
+    display: inline-block;
+}
+
+.oom-p-c-tab .oom-rental-loop-content p {
+    overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 2;
+    display: box;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    margin-bottom: 0px;
+}
+
+.oom-p-c-tab h2.jet-listing-dynamic-field__content {
+    margin: 0px;
+}
+.oom-bkn-btn{
+	width: 100%;
+}
+
+@media(min-width: 991px){
+	.input-with-clear {
+		width: calc(100% - 220px);
+	}
+}
+@media(max-width:991px){
+	.input-with-clear {
+		width: 100%;
+	}
+}
+
+.input-with-clear input {
+  padding-right: 2.5rem; /* space for the (×) button */ 
+	width: 100%!important;
+}
+
+.clear-btn {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #999;
+  display: none;
+}
+
+.oom-checked-rfq .elementor-icon {
+    border: 2px solid;
+    padding: 3px;
+    border-radius: 2px;
+	cursor: pointer;
+}
+.oom-checked-rfq .elementor-icon svg {
+    opacity: 0;
+}
+.oom-checked-rfq.active .elementor-icon svg {
+    opacity: 1;
+}
+	
+.oom-rec-group-image .oomModelSwiper .swiper-oom-control {
+    background: transparent;
+    padding-bottom: 0px;
+    border: none;
+}
+.oom-rec-group-image .swiper-slide {
+    background: transparent;
+    padding-bottom: 0px;
+}
+
+@media(max-width: 1024px){
+	.oomModelSwiper .swiper-pagination.swiper-pagination-custom {
+		font-size: 16px;
+	}
+}
+/* Rental Listing - End */
+
+/* Home - Start */
+.oom-home-carousel .swiper-pagination-bullet {
+    width: 30px !important;
+    border-radius: 5px !important;
+    height: 6px ! Important;
+}
+.oom-home-carousel .swiper-pagination{
+    display: flex;
+    left: 5%!important;
+	max-width: 85%!important
+}
+
+.oom-home-banner-gradient{
+	position: relative;
+}
+.oom-home-banner-gradient:after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    background: linear-gradient(90deg, #0075C5 0%, #000910 92.41%);
+    width: 84%;
+    height: 100%;
+    display: block;
+    left: 0%;
+    top: 0%;
+    opacity: 0.5;
+	clip-path: polygon(0 0, 95% 0, 100% 100%, 0% 100%);
+}
+.oom-home-banner-sub-title h2{
+    max-width: 240px;
+}
+.oom-home-banner-sub-title-wide h2{
+    max-width: 100%;
+}
+
+.oom-nav-btn-first-white::before {
+	background: white;
+}
+.oom-nav-btn-first-white:hover::before{
+	background: linear-gradient(135deg, #63f0c7 43%, #1478f0 65%);
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+.oom-home-why-drive-box {
+	position: relative;
+}
+
+
+.oom-home-offer-container:hover img, .oom-home-offer-container-two:hover img{
+    transform: scale(1.5);
+}
+
+.oom-home-offer-container:hover .oom-home-offer-img-one img{
+    filter: brightness(30%) contrast(100%) saturate(100%) blur(0px) hue-rotate(0deg);
+}
+
+.oom-brand-carousel img.swiper-slide-image {
+    max-height: 65px;
+    object-fit: contain;
+}
+
+
+
+
+@media (min-width: 1024px) {
+	.oom-home-why-drive-box:after {
+		content: "";
+		background: url(/wp-content/uploads/2025/07/Break-Line.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		display: block;
+		right: -10px;
+	}
+	.oom-home-why-drive-box:last-child:after {
+		display: none;
+	}
+}
+
+@media (min-width: 1441px) {
+	.oom-home-why-drive-box:after {
+		right: -20px;
+	}
+}
+
+
+
+@media(max-width: 1849px){
+	.oom-home-why-drive-grid .elementor-icon-box-title {
+		min-height: 2.4em;
+	}
+
+}
+@media(max-width:992px){
+	.oom-home-banner-sub-title .elementor-heading-title {
+		min-height: 3.7em;
+	}
+	.oom-home-banner-gradient:after {
+		content: "";
+		width: 100%;
+		clip-path: polygon(0 0, 98% 0, 100% 100%, 0% 100%);
+	}
+}
+@media(max-width:767px){
+	.oom-home-banner-sub-title .elementor-heading-title {
+		min-height: 0em!important;
+	}
+	.oom-home-banner-sub-title h2{
+		max-width: 100%;
+	}
+	.oom-home-offer-container h2 {
+		min-height: 2.4em;
+	}
+}
+
+/* Home - End */
+
+
+/* Sitemap - Start */
+.oom-shortcode-menu li a{
+    color: #18191B;
+    font-size: clamp(1rem, 0.975rem + 0.125vw, 1.125rem);
+}
+.oom-shortcode-menu ul.sub-menu {
+    list-style: disc;
+}
+.oom-shortcode-menu ul.sub-menu li{
+	margin-bottom: 10px;
+}
+.oom-shortcode-menu > li {
+    margin-bottom: 15px;
+}
+/* Sitemap - End */
+
+/* Car Rental - Start */
+.oom-rental-hover {
+	opacity: 0;
+	height: 0px;
+	transition: 1s;
+}
+.oom-rental-initial{
+	opacity: 1;
+	height: initial;
+	transition: 1s;
+}
+.oom-rental-hover-box:hover .oom-rental-hover {
+	opacity: 1;
+	height: initial;
+	transition: 0.5s;
+}
+.oom-rental-hover-box:hover .oom-rental-initial {
+    opacity: 0;
+	height: 0px;
+	transition: 0.5s;
+}
+/* Car Rental - End */
+
+/* Corporate - Start */
+.oom-corporate-logo-carousel .swiper-slide img {
+    height: 186px;
+    object-fit: contain;
+    object-position: top;
+}
+@media(max-width:767px){
+	.oom-corporate-logo-carousel .swiper-slide img {
+		height: 80px;
+		object-fit: contain;
+		object-position: center center;
+	}
+}
+
+
+/* Corporate - End */
+
+/* Career - Start */
+.oom-career-box-desc {
+    max-height: 0px;
+    opacity: 0;
+	transition: 0.3s;
+}
+.oom-career-box:hover .oom-career-box-desc {
+    max-height: initial;
+    opacity: 1;
+	transition: 0.3s;
+}
+.oom-career-box:hover .oom-career-box-img img {
+    transform: rotate(90deg);
+	transition: 0.3s;
+}
+.oom-career-box-img img {
+    transform: rotate(1deg);
+	transition: 0.3s;
+}
+/* Career - End  */
+
+
+/* Daily Rental - Start */
+.oom-daily-rental-pickup-box, .oom-daily-rental-return-box {
+    padding-right: 20px;
+    border-right: 1px solid #e5e5e5;
+	width: 35%;
+}
+.oom-daily-rental-location-box{
+	width: 30%;
+}
+form.oom-daily-rental-form:before {
+    clip-path: polygon(20% 0%, 95% 0%, 100% 20%, 100% 80%, 100% 100%, 4% 100%, 0 90%, 0 0);
+    height: 100%;
+    width: 100%;
+    display: block;
+    content: "";
+    background: #6e4e4c42;
+    position: absolute;
+    left: 4px;
+    bottom: -1.2%;
+    filter: blur(30px);
+}
+.oom-daily-rental-container {
+    display: flex;
+    gap: 20px;
+    background: white;
+    padding: 40px;
+    clip-path: polygon(20% 0%, 95% 0%, 100% 20%, 100% 80%, 100% 100%, 4% 100%, 0 90%, 0 0);
+}
+.oom-daily-rental-flex {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+p.oom-daily-rental-info-text {
+/*     font-size: 14px; */
+    line-height: 1.2em;
+    font-style: italic;
+    color: #ababab;
+    margin: 10px 0px;
+}
+.oom-daily-rental-flex input, .oom-daily-rental-flex select,
+.oom-daily-rental-location-box-top select{
+    padding: 0px;
+/*     font-size: 14px; */
+	font-weight: 700;
+	border: none;
+	outline: 0;
+	color: #2E2E2E;
+}
+.oom-daily-rental-flex input {
+    width: 60%;
+    padding-right: 20px;
+    border-right: 1px solid #e5e5e5;
+    border-radius: 0px;
+}
+.oom-daily-rental-flex select {
+    width: 40%;
+}
+.oom-daily-rental-pickup-box-bottom {
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+.oom-daily-rental-pickup-box-bottom p{
+    margin: 0px;
+}
+.oom-daily-rental-pickup-box-bottom i {
+    width: 25px;
+    height: 25px;
+    border: 2px solid #2e2e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.oom-daily-rental-pickup-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.oom-daily-rental-pickup-other-location input,
+.oom-daily-rental-drop-off-other-location input{
+    border: 1px solid #e5e5e5;
+    margin: 10px 0px;
+    font-size: 14px;
+}
+p.oom-daily-rental-pickup-location-text,
+p.oom-daily-rental-drop-off-location-text{
+    font-size: 14px;
+    color: #bdbdbd;
+}
+@media(max-width: 1024px){
+	form.oom-daily-rental-form:before {
+		display: none;
+	}
+	.oom-daily-rental-container {
+		clip-path: polygon(20% 0%, 90% 0%, 105% 20%, 100% 80%, 100% 100%, 5% 100%, 0% 95%, 0% 0%);
+	}
+	.oom-daily-rental-pickup-box, .oom-daily-rental-return-box {
+		width: 30%;
+	}
+	.oom-daily-rental-location-box {
+		width: 40%;
+	}
+	.oom-daily-rental-pickup-box-bottom i {
+		width: 20px;
+		height: 20px;
+		font-size: 10px;
+	}
+}
+
+@media(max-width:768px){
+	.oom-daily-rental-container {
+		flex-direction: column;
+	}
+	.oom-daily-rental-pickup-box, .oom-daily-rental-return-box, .oom-daily-rental-location-box {
+        width: 100%;
+    }
+	.oom-daily-rental-pickup-box, .oom-daily-rental-return-box {
+		padding-right: 0px;
+		padding-bottom: 20px;
+		border-right: 0px;
+		border-bottom: 1px solid #e5e5e5;
+	}
+}
+
+@media (max-width: 560px) {
+	.oom-daily-rental-container {
+        clip-path: polygon(20% 0%, 90% 0%, 120% 20%, 100% 80%, 100% 100%, 10% 100%, 0% 95%, 0% 0%);
+    }
+	.oom-daily-rental-container {
+    	padding: 20px;
+	}
+}
+/* Daily Rental - End */
+
+
+/* Single Daily Rental - Start */
+#oom-pagi-swiper .swiper-slide img {
+    min-height: 100%!important;
+	max-height: 300px!important;
+}
+#oom-pagi-swiper .swiper-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative !important;
+    top: 0px !important;
+    flex-direction: row;
+}
+#oom-pagi-swiper .swiper-pagination span {
+    width: 100%;
+    border-radius: 5px;
+    background: #2e2e2e;
+    height: 5px;
+}
+#oom-pagi-swiper .swiper-oom-control {
+    max-width: 50%;
+    background: transparent !important;
+    margin: 0 auto;
+    border: none !important;
+}
+#oom-pagi-swiper .swiper-slide
+ {
+    padding-bottom: 20px;
+    background: transparent;
+}
+.oom-single-rental-add-on-features-item {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.oom-single-rental-container .oom-radio-group-item {
+    display: flex;
+    gap: 10px;
+}
+.oom-single-rental-container .oom-radio-group {
+    display: flex;
+    gap: 20px;
+}
+.oom-single-rental-details {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.oom-single-rental-container label {
+    line-height: 1.2em;
+}
+
+/* Single Daily Rental - End */
+
+
+
+@media (max-width: 1849px) {
+	.oom-nav-btn a, #oom-custom-form-btn button {
+		padding: 15px 28px !important;
+	}
+	.oom-rfq-btn a {
+        padding: 15px 15px !important;
+    }
+	
+}
+
+@media (max-width: 1690px) {
+    .oom-nav-btn a, #oom-custom-form-btn button {
+        padding: 12px 14px !important;
+        font-size: clamp(0.875rem, 0.375rem + 0.625vw, 1.125rem) !important;
+    }
+}
+
+@media (max-width: 1360px) and (min-width:1280px) {
+    .oom-mobile-menu-container-box .oom-nav-btn a{
+        padding: 15px 12px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .oom-nav-btn a, #oom-custom-form-btn button {
+        padding: 10px 16px !important;
+    }
+}
+
+@media (min-width: 1439px) and (max-width: 1567px) {
+	.oom-main-menu a {
+		padding: 12px !important;
+	}
+	
+}
+
+
+@media (max-width: 1440px) {
+	
+	.oom-promotions-listing-grid ul.jet-slick-dots {
+		bottom: 3%;
+	}
+	
+	.oom-promotion-popup-content-container.e-flex.e-con.e-child {
+		height: 280px !important;
+	}
+	
+}
+@media (max-width: 1439px) {
+	#jet-popup-954 .jet-popup__close-button {
+/* 		-webkit-transform: translateX(-139px) translateY(48px); */
+	}
+}
+
+@media (max-width: 1024px) {
+	
+	.oom-constraint-width, .oom-constraint-width-80 {
+		max-width: unset!important;
+        width: unset!important;
+		margin: unset;	
+	}
+	
+	.oom-quote-popup {
+		top:124px;
+	}
+	
+	.oom-contact-list .elementor-icon-box-icon {
+		margin-top: 12px !important;
+	}
+	
+	.oom-promotion-loop-content {
+		height: 264px;
+	}
+	
+	.oom-promotion-loop-title .elementor-heading-title {
+		-webkit-line-clamp: 2;
+	}
+	
+	.oom-promotions-listing-grid ul.jet-slick-dots {
+		position: unset;
+		bottom: unset;
+		width: unset;
+		right: unset;
+		left: unset;
+		display: flex;
+		justify-content: center;
+		padding-left: unset;
+	}
+	
+	#jet-popup-954 .jet-popup__close-button {
+/* 		-webkit-transform: translateX(-30px) translateY(30px) !important; */
+	}
+	
+}
+
+@media (max-width: 480px) {
+	
+	.oom-quote-popup {
+		top: 100px !important;
+	}
+	
+	.oom-quote-popup .dialog-lightbox-close-button {
+		display: block !important;
+	}
+	
+	.oom-testimonial-carousel span.swiper-pagination-bullet {
+		width: 25px !important;
+	}
+	
+	.oom-promotions-listing-grid .jet-slick-dots li {
+		width: 25px !important;
+	}
+	
+	.oom-promotion-loop-content {
+        height: unset;
+    }
+}
+
+/* Single Rental Form Layout - Matching Screenshot Design */
+.oom-single-rental-details {
+    margin-bottom: 20px;
+}
+
+.oom-single-rental-details label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.oom-single-rental-flex {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.oom-date-input-wrapper,
+.oom-time-input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+/* Removed cursor pointer from wrapper since we're only making the input clickable */
+
+.oom-date-icon,
+.oom-time-icon {
+	position: absolute;
+    left: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: #00148C;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.oom-date-icon:hover,
+.oom-time-icon:hover {
+    background-color: #0026CC;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.oom-date-icon:active,
+.oom-time-icon:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.oom-date-icon svg,
+.oom-time-icon svg {
+    color: white;
+	width: 18px;
+    height: 18px;
+}
+
+.oom-date-input-wrapper input[type="date"],
+.oom-time-input-wrapper select {
+	/* width: 100%; */
+	width: calc(100% - 40px);
+	float: right;
+    /* padding: 0px 10px 0px 50px; */
+	padding: 0px 10px 0px 6px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    background-color: white;
+    color: #666;
+    transition: border-color 0.3s ease;
+	outline: none;
+    cursor: pointer;
+}
+
+.oom-date-input-wrapper input[type="date"]:focus,
+.oom-time-input-wrapper select:focus {
+    outline: none;
+    border-color: #00148C;
+    box-shadow: 0 0 0 2px rgba(0, 20, 140, 0.1);
+}
+
+.oom-date-input-wrapper input[type="date"]:disabled,
+.oom-time-input-wrapper select:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* Default time value styling */
+.oom-time-input-wrapper select option[value=""] {
+    color: #666;
+}
+
+.oom-single-rental-details input, .oom-single-rental-details select {
+    border: 1px solid #dddddd;
+	height: 40px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .oom-single-rental-flex {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .oom-date-input-wrapper,
+    .oom-time-input-wrapper {
+        width: 100%;
+    }
+}
+
+.oom-single-rental-pricing {
+    font-weight: bold;
+}
+
+.ui-datepicker-title select
+ {
+    padding: 2px;
+}
+
+.ui-datepicker-title {
+    display: flex;
+}
+
+.oom-daily-rental-flex input::placeholder {
+    opacity: 1;
+    color: #2e2e2e;
+}
+
+.oom-date-input-wrapper input {
+    padding-left: 50px;
+}
+
+/* Blockout Dates Styling for jQuery Datepicker */
+.ui-datepicker .ui-state-default.blockout-date {
+    background-color: #ffebee !important;
+    color: #d32f2f !important;
+    border: 1px solid #ffcdd2 !important;
+    text-decoration: line-through;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.ui-datepicker .ui-state-default.blockout-date:hover {
+    background-color: #ffebee !important;
+    color: #d32f2f !important;
+    border: 1px solid #ffcdd2 !important;
+}
+
+.ui-datepicker .ui-state-default.blockout-date.ui-state-active {
+    background-color: #ffebee !important;
+    color: #d32f2f !important;
+    border: 1px solid #ffcdd2 !important;
+}
+
+.ui-datepicker .ui-state-default.blockout-date.ui-state-hover {
+    background-color: #ffebee !important;
+    color: #d32f2f !important;
+    border: 1px solid #ffcdd2 !important;
+}
+
+/* Add a tooltip or indicator for blockout dates */
+.ui-datepicker .ui-state-default.blockout-date::after {
+    content: "✗";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.oom-custom-pricing-box .strike {
+    text-decoration: line-through;
+    color: #8b8b8b;
+    font-size: clamp(0.875rem, 0.825rem + 0.25vw, 1.125rem);
+}
+.oom-custom-pricing-box .highlight {
+    font-size: clamp(1.125rem, 0.85rem + 1.375vw, 2.5rem);
+    font-weight: 700;
+    color: #00148C;
+}
+.oom-daily-rental-flex input, .oom-daily-rental-flex select {
+    cursor: pointer;
+}
+img.oom-info-icon {
+    max-width: 24px;
+    object-fit: contain;
+}
+.oom-rfq-btn a {
+    width: 100% !important;
+}
+.oom-contact-form .elementor-field-textual.elementor-size-lg,
+.oom-contact-form input.elementor-field-textual, 
+.oom-contact-form select.elementor-field-textual {
+    min-height: 50px;
+	height: 50px!important;
+}
+select#field_c_services {
+    height: 50px!important;
+	min-height: 50px!important;
+}
+
+.ti-widget.ti-goog .ti-controls .ti-next, .ti-widget.ti-goog .ti-controls .ti-prev {
+    background-color: #01148d!important;
+    outline-color: #01148d!important;
+}
+.ti-widget.ti-goog .ti-controls .ti-next:before, .ti-widget.ti-goog .ti-controls .ti-prev:before {
+    border-color: #fff!important;
+}

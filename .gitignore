@@ -1,0 +1,32 @@
+# Composer
+/vendor/
+composer.lock
+
+# PHPUnit
+/coverage/
+coverage.xml
+.phpunit.result.cache
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# WordPress
+/wordpress/
+/wp-content/
+
+# SonarCloud
+.sonar/
+.scannerwork/
+
+# Node (if needed)
+node_modules/
+package-lock.json
+

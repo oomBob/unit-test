@@ -1,0 +1,26 @@
+/* Login Popup Icon Changes */
+section#oom-signup-form a, section#oom-login-form a {
+    text-decoration: underline;
+}
+
+a.dialog-close-button.dialog-lightbox-close-button {
+    position: absolute!important;
+    right: 9px!important;
+    color: white!important;
+    font-size: 15px!important;
+}
+.fb-img i, .gg-img i, .fb-img-reg i, .gg-img-reg i{
+    display: none;
+}
+
+.login-button::before, .fb-img::before, .fb-img-reg::before, .gg-img::before, .gg-img-reg::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    object-fit: contain!important; 
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+	margin:0px 10px;
+}
