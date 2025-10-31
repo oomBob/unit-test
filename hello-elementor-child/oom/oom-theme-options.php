@@ -71,7 +71,7 @@ function oom_theme_options_page_html() {
     $oom_gtm_code = get_option('oom_gtm_code', '');
     $oom_table_status = get_option('oom_table_status', 'active');
     $oom_form_status = get_option('oom_form_status', 'active');
-    $oom_google_place_api = get_option('oom_google_place_api', 'AIzaSyAK5x3pdAgDPv-QsfX4SXHtmULjYBW0NIE');
+    $oom_google_place_api = get_option('oom_google_place_api', '');
     $oom_location = get_option('oom_location', '205 Braddell Road Blk H Singapore 479401');
     $oom_security_deposit = get_option('oom_security_deposit', '500.00');
     $oom_advanced_booking_days = get_option('oom_advanced_booking_days', '2');

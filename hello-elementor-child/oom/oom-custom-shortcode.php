@@ -711,7 +711,7 @@ add_shortcode('oom_daily_rental_form', function () {
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     
     <!-- Google Places API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr(get_option('oom_google_place_api', 'AIzaSyAK5x3pdAgDPv-QsfX4SXHtmULjYBW0NIE')); ?>&libraries=places&loading=async"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr(get_option('oom_google_place_api', '')); ?>&libraries=places&loading=async"></script>
     
     <script>
     // Global function to update location text when Google Autocomplete fills a field
@@ -1589,7 +1589,7 @@ add_shortcode('oom_single_rental_form', function () {
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     
     <!-- Google Places API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr(get_option('oom_google_place_api', 'AIzaSyAK5x3pdAgDPv-QsfX4SXHtmULjYBW0NIE')); ?>&libraries=places&loading=async"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr(get_option('oom_google_place_api', '')); ?>&libraries=places&loading=async"></script>
     
     <script>
     // Global function to update location text when Google Autocomplete fills a field
