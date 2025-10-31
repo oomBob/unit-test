@@ -22,6 +22,8 @@ jobs:
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
+        env:
+          XDEBUG_MODE: coverage
         with:
           php-version: '8.0'
           extensions: mbstring, xml, dom, curl, libxml, iconv, zip
@@ -29,6 +31,21 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
+
+      - name: Test Xdebug Coverage Generation
+        env:
+          XDEBUG_MODE: coverage
+        run: |
+          echo "=== Testing Xdebug Coverage ==="
+          php -r "
+            if (!extension_loaded('xdebug')) {
+              echo 'ERROR: Xdebug is NOT loaded!' . PHP_EOL;
+              exit(1);
+            }
+            echo '✅ Xdebug version: ' . phpversion('xdebug') . PHP_EOL;
+            echo '✅ XDEBUG_MODE: ' . (getenv('XDEBUG_MODE') ?: 'not set') . PHP_EOL;
+          " || exit 1
+          echo ""
 
       - name: Verify Xdebug is enabled
         env:
@@ -60,7 +77,8 @@ jobs:
           echo ""
           echo "Running PHPUnit tests with coverage generation..."
           set +e  # Don't exit on error
-          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose 2>&1 | tee phpunit-output.log
+          # Suppress HTML output by redirecting errors and setting display_errors=0
+          php -d display_errors=0 -d display_startup_errors=0 vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose 2>&1 | tee phpunit-output.log
           PHPUNIT_EXIT_CODE=$?
           echo ""
           echo "=== PHPUnit Exit Code: $PHPUNIT_EXIT_CODE ==="
