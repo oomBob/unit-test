@@ -63,9 +63,9 @@ jobs:
           vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose 2>&1 | tee phpunit-output.log
           PHPUNIT_EXIT_CODE=$?
           echo ""
-          echo "PHPUnit exit code: $PHPUNIT_EXIT_CODE"
+          echo "=== PHPUnit Exit Code: $PHPUNIT_EXIT_CODE ==="
           echo ""
-          echo "Checking if coverage.xml was created:"
+          echo "=== Checking for coverage.xml ==="
           if [ -f coverage.xml ]; then
             echo "✅ coverage.xml exists!"
             echo "File size: $(wc -l < coverage.xml) lines"
@@ -74,11 +74,17 @@ jobs:
           else
             echo "❌ coverage.xml NOT found!"
             echo ""
-            echo "PHPUnit output (last 50 lines):"
-            tail -50 phpunit-output.log || echo "No phpunit-output.log found"
+            echo "=== FULL PHPUnit Output ==="
+            cat phpunit-output.log
+            echo ""
+            echo "=== Searching for coverage-related messages ==="
+            grep -i "coverage\|xdebug\|driver" phpunit-output.log || echo "No coverage messages found"
+            echo ""
+            echo "=== Checking for warnings ==="
+            grep -i "warning" phpunit-output.log || echo "No warnings found"
           fi
           echo ""
-          echo "Checking if phpunit-report.xml was created:"
+          echo "=== Checking if phpunit-report.xml was created ==="
           ls -la phpunit-report.xml 2>/dev/null || echo "phpunit-report.xml NOT found!"
           # Exit with success if coverage.xml was created, even if tests failed
           if [ -f coverage.xml ]; then
