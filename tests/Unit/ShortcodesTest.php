@@ -23,6 +23,9 @@ class ShortcodesTest extends TestCase
         parent::setUp();
         Monkey\setUp();
         
+        // Mock WordPress shortcode functions before loading the file
+        Monkey\Functions\when('add_shortcode')->justReturn();
+        
         // Load the shortcode files
         require_once __DIR__ . '/../../hello-elementor-child/oom/oom-global-shortcode.php';
     }
@@ -42,6 +45,13 @@ class ShortcodesTest extends TestCase
     public function test_oom_ratings_default()
     {
         $atts = [];
+        
+        // Mock shortcode_atts to return merged attributes with defaults
+        Monkey\Functions\expect('shortcode_atts')
+            ->once()
+            ->with(['display' => '5'], $atts)
+            ->andReturn(['display' => '5']);
+        
         $result = oom_ratings($atts);
         
         $this->assertIsString($result);
@@ -55,6 +65,13 @@ class ShortcodesTest extends TestCase
     public function test_oom_ratings_custom_display()
     {
         $atts = ['display' => '3'];
+        
+        // Mock shortcode_atts to return merged attributes
+        Monkey\Functions\expect('shortcode_atts')
+            ->once()
+            ->with(['display' => '5'], $atts)
+            ->andReturn(['display' => '3']);
+        
         $result = oom_ratings($atts);
         
         $this->assertIsString($result);
@@ -64,8 +81,9 @@ class ShortcodesTest extends TestCase
         $checked_count = substr_count($result, 'fa-star checked');
         $this->assertEquals(3, $checked_count);
         
-        // Should have 2 unchecked stars
-        $unchecked_count = substr_count($result, 'fa-star"></span>') - $checked_count;
+        // Should have 2 unchecked stars (total stars minus checked stars)
+        $total_stars = substr_count($result, 'fa-star');
+        $unchecked_count = $total_stars - $checked_count;
         $this->assertEquals(2, $unchecked_count);
     }
 
@@ -75,6 +93,13 @@ class ShortcodesTest extends TestCase
     public function test_oom_ratings_zero_display()
     {
         $atts = ['display' => '0'];
+        
+        // Mock shortcode_atts to return merged attributes
+        Monkey\Functions\expect('shortcode_atts')
+            ->once()
+            ->with(['display' => '5'], $atts)
+            ->andReturn(['display' => '0']);
+        
         $result = oom_ratings($atts);
         
         $this->assertIsString($result);
@@ -88,6 +113,13 @@ class ShortcodesTest extends TestCase
     public function test_oom_ratings_max_display()
     {
         $atts = ['display' => '5'];
+        
+        // Mock shortcode_atts to return merged attributes
+        Monkey\Functions\expect('shortcode_atts')
+            ->once()
+            ->with(['display' => '5'], $atts)
+            ->andReturn(['display' => '5']);
+        
         $result = oom_ratings($atts);
         
         $checked_count = substr_count($result, 'fa-star checked');
@@ -100,6 +132,13 @@ class ShortcodesTest extends TestCase
     public function test_oom_ratings_out_of_range_high()
     {
         $atts = ['display' => '10'];
+        
+        // Mock shortcode_atts to return merged attributes
+        Monkey\Functions\expect('shortcode_atts')
+            ->once()
+            ->with(['display' => '5'], $atts)
+            ->andReturn(['display' => '10']);
+        
         $result = oom_ratings($atts);
         
         // Should clamp to 5
@@ -113,6 +152,13 @@ class ShortcodesTest extends TestCase
     public function test_oom_ratings_negative()
     {
         $atts = ['display' => '-5'];
+        
+        // Mock shortcode_atts to return merged attributes
+        Monkey\Functions\expect('shortcode_atts')
+            ->once()
+            ->with(['display' => '5'], $atts)
+            ->andReturn(['display' => '-5']);
+        
         $result = oom_ratings($atts);
         
         // Should clamp to 0

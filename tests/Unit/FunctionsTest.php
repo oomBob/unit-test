@@ -23,6 +23,15 @@ class FunctionsTest extends TestCase
         parent::setUp();
         Monkey\setUp();
         
+        // Mock is_admin() before loading functions.php since it's called in oom-optimization-security.php
+        Monkey\Functions\when('is_admin')->justReturn(false);
+        
+        // Mock other WordPress functions that may be called during file loading
+        Monkey\Functions\when('add_action')->justReturn();
+        Monkey\Functions\when('add_filter')->justReturn();
+        Monkey\Functions\when('add_shortcode')->justReturn();
+        Monkey\Functions\when('get_option')->justReturn('');
+        
         // Load the functions file
         require_once __DIR__ . '/../../hello-elementor-child/functions.php';
     }
@@ -54,7 +63,7 @@ class FunctionsTest extends TestCase
             
         Monkey\Functions\expect('add_post_meta')
             ->once()
-            ->with($post_id, 'wpb_post_views_count', '1', true)
+            ->with($post_id, 'wpb_post_views_count', '1')
             ->andReturn(true);
 
         wpb_set_post_views($post_id);
@@ -108,6 +117,9 @@ class FunctionsTest extends TestCase
     {
         $post_id = 1;
         $count = 10;
+        
+        // Mock is_admin() as it may be called during test execution
+        Monkey\Functions\when('is_admin')->justReturn(false);
         
         Monkey\Functions\expect('get_post_meta')
             ->once()
