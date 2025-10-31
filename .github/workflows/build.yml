@@ -1,10 +1,8 @@
-name: Build
+# This workflow is disabled - using sonarcloud.yml instead
+# If you need this workflow, disable Automatic Analysis in SonarCloud first
+name: Build (Disabled)
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_dispatch:  # Only runs manually to prevent conflicts
 jobs:
   sonarqube:
     name: SonarQube

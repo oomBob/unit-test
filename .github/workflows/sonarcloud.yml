@@ -50,10 +50,19 @@ jobs:
           XDEBUG_MODE: coverage
         run: |
           echo "Running PHPUnit with coverage..."
-          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose || echo "PHPUnit completed with exit code: $?"
+          echo "XDEBUG_MODE is set to: $XDEBUG_MODE"
+          php -r "echo 'Xdebug loaded: ' . (extension_loaded('xdebug') ? 'YES' : 'NO') . PHP_EOL;"
+          echo ""
+          echo "Running PHPUnit tests with coverage generation..."
+          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose || echo "PHPUnit exit code: $?"
           echo ""
           echo "Checking if coverage.xml was created:"
           ls -la coverage.xml 2>/dev/null || echo "coverage.xml NOT found!"
+          if [ -f coverage.xml ]; then
+            echo "✅ coverage.xml exists!"
+            echo "File size: $(wc -l < coverage.xml) lines"
+            head -10 coverage.xml
+          fi
           echo ""
           echo "Checking if phpunit-report.xml was created:"
           ls -la phpunit-report.xml 2>/dev/null || echo "phpunit-report.xml NOT found!"
