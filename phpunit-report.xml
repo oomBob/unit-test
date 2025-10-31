@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="19" assertions="13" errors="8" warnings="0" failures="0" skipped="0" time="0.540768">
-    <testsuite name="Unit" tests="19" assertions="13" errors="8" warnings="0" failures="0" skipped="0" time="0.540768">
-      <testsuite name="HelloElementorChild\Tests\Unit\FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" tests="5" assertions="5" errors="2" warnings="0" failures="0" skipped="0" time="0.476249">
-        <testcase name="test_wpb_get_post_views_empty_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="90" assertions="0" time="0.163462">
-          <error type="Error">HelloElementorChild\Tests\Unit\FunctionsTest::test_wpb_get_post_views_empty_count
+  <testsuite name="" tests="19" assertions="13" errors="8" warnings="0" failures="0" skipped="0" time="0.560276">
+    <testsuite name="Unit" tests="19" assertions="13" errors="8" warnings="0" failures="0" skipped="0" time="0.560276">
+      <testsuite name="HelloElementorChild\Tests\Unit\FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" tests="5" assertions="5" errors="2" warnings="0" failures="0" skipped="0" time="0.494237">
+        <testcase name="test_wpb_get_post_views_with_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="107" assertions="0" time="0.163848">
+          <error type="Error">HelloElementorChild\Tests\Unit\FunctionsTest::test_wpb_get_post_views_with_count
 Error: Call to undefined function is_admin()
 
 /Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-optimization-security.php:96
 /Users/oomhradmin/oombob/unit-test/hello-elementor-child/functions.php:106
 /Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php:27</error>
         </testcase>
-        <testcase name="test_wpb_set_post_views_existing_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="68" assertions="1" time="0.296711"/>
-        <testcase name="test_theme_version_constant" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="125" assertions="2" time="0.005992"/>
-        <testcase name="test_wpb_get_post_views_with_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="107" assertions="1" time="0.000945"/>
-        <testcase name="test_wpb_set_post_views_empty_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="42" assertions="1" time="0.009139">
+        <testcase name="test_theme_version_constant" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="125" assertions="2" time="0.014397"/>
+        <testcase name="test_wpb_set_post_views_empty_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="42" assertions="1" time="0.313284">
           <error type="Mockery\Exception\InvalidCountException">HelloElementorChild\Tests\Unit\FunctionsTest::test_wpb_set_post_views_empty_count
 Mockery\Exception\InvalidCountException: Method add_post_meta(1, 'wpb_post_views_count', '1', true) from Mockery_0 should be called
  exactly 1 times but called 0 times.
@@ -28,62 +26,64 @@ Mockery\Exception\InvalidCountException: Method add_post_meta(1, 'wpb_post_views
 /Users/oomhradmin/oombob/unit-test/vendor/brain/monkey/inc/api.php:38
 /Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php:35</error>
         </testcase>
+        <testcase name="test_wpb_get_post_views_empty_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="90" assertions="1" time="0.000923"/>
+        <testcase name="test_wpb_set_post_views_existing_count" class="HelloElementorChild\Tests\Unit\FunctionsTest" classname="HelloElementorChild.Tests.Unit.FunctionsTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/FunctionsTest.php" line="68" assertions="1" time="0.001785"/>
       </testsuite>
-      <testsuite name="HelloElementorChild\Tests\Unit\OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.001634">
-        <testcase name="test_remove_block_css_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="42" assertions="1" time="0.000504"/>
-        <testcase name="test_disable_emojis_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="50" assertions="1" time="0.000370"/>
-        <testcase name="test_disable_emojis_tinymce_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="58" assertions="1" time="0.000372"/>
-        <testcase name="test_disable_emojis_dns_prefetch_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="66" assertions="1" time="0.000388"/>
+      <testsuite name="HelloElementorChild\Tests\Unit\OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.001465">
+        <testcase name="test_remove_block_css_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="42" assertions="1" time="0.000386"/>
+        <testcase name="test_disable_emojis_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="50" assertions="1" time="0.000364"/>
+        <testcase name="test_disable_emojis_tinymce_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="58" assertions="1" time="0.000351"/>
+        <testcase name="test_disable_emojis_dns_prefetch_exists" class="HelloElementorChild\Tests\Unit\OptimizationTest" classname="HelloElementorChild.Tests.Unit.OptimizationTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/OptimizationTest.php" line="66" assertions="1" time="0.000364"/>
       </testsuite>
-      <testsuite name="HelloElementorChild\Tests\Unit\SecurityTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/SecurityTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.000738">
-        <testcase name="test_oom_custom_security_headers_exists" class="HelloElementorChild\Tests\Unit\SecurityTest" classname="HelloElementorChild.Tests.Unit.SecurityTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/SecurityTest.php" line="42" assertions="1" time="0.000376"/>
-        <testcase name="test_oom_custom_security_headers_headers_sent" class="HelloElementorChild\Tests\Unit\SecurityTest" classname="HelloElementorChild.Tests.Unit.SecurityTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/SecurityTest.php" line="50" assertions="1" time="0.000363"/>
+      <testsuite name="HelloElementorChild\Tests\Unit\SecurityTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/SecurityTest.php" tests="2" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.000965">
+        <testcase name="test_oom_custom_security_headers_exists" class="HelloElementorChild\Tests\Unit\SecurityTest" classname="HelloElementorChild.Tests.Unit.SecurityTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/SecurityTest.php" line="42" assertions="1" time="0.000444"/>
+        <testcase name="test_oom_custom_security_headers_headers_sent" class="HelloElementorChild\Tests\Unit\SecurityTest" classname="HelloElementorChild.Tests.Unit.SecurityTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/SecurityTest.php" line="50" assertions="1" time="0.000522"/>
       </testsuite>
-      <testsuite name="HelloElementorChild\Tests\Unit\ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" tests="8" assertions="2" errors="6" warnings="0" failures="0" skipped="0" time="0.062146">
-        <testcase name="test_oom_ratings_default" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="42" assertions="0" time="0.006636">
-          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_default
+      <testsuite name="HelloElementorChild\Tests\Unit\ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" tests="8" assertions="2" errors="6" warnings="0" failures="0" skipped="0" time="0.063609">
+        <testcase name="test_oom_ratings_custom_display" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="55" assertions="0" time="0.007261">
+          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_custom_display
 Error: Call to undefined function add_shortcode()
 
 /Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:16
 /Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:27</error>
         </testcase>
-        <testcase name="test_oom_ratings_max_display" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="88" assertions="0" time="0.002958">
-          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_max_display
-Error: Call to undefined function shortcode_atts()
-
-/Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
-/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:91</error>
-        </testcase>
-        <testcase name="test_oom_ratings_out_of_range_high" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="100" assertions="0" time="0.000394">
-          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_out_of_range_high
-Error: Call to undefined function shortcode_atts()
-
-/Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
-/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:103</error>
-        </testcase>
-        <testcase name="test_oom_ratings_negative" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="113" assertions="0" time="0.000365">
-          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_negative
-Error: Call to undefined function shortcode_atts()
-
-/Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
-/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:116</error>
-        </testcase>
-        <testcase name="test_oom_hero_slider_function_exists" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="126" assertions="1" time="0.000356"/>
-        <testcase name="test_oom_ratings_zero_display" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="75" assertions="0" time="0.000360">
+        <testcase name="test_oom_ratings_zero_display" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="75" assertions="0" time="0.002844">
           <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_zero_display
 Error: Call to undefined function shortcode_atts()
 
 /Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
 /Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:78</error>
         </testcase>
-        <testcase name="test_oom_ratings_custom_display" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="55" assertions="0" time="0.000368">
-          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_custom_display
+        <testcase name="test_oom_ratings_out_of_range_high" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="100" assertions="0" time="0.000434">
+          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_out_of_range_high
 Error: Call to undefined function shortcode_atts()
 
 /Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
-/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:58</error>
+/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:103</error>
         </testcase>
-        <testcase name="test_oom_hero_slider_returns_string" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="134" assertions="1" time="0.050710"/>
+        <testcase name="test_oom_ratings_negative" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="113" assertions="0" time="0.000409">
+          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_negative
+Error: Call to undefined function shortcode_atts()
+
+/Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
+/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:116</error>
+        </testcase>
+        <testcase name="test_oom_hero_slider_function_exists" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="126" assertions="1" time="0.000372"/>
+        <testcase name="test_oom_ratings_max_display" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="88" assertions="0" time="0.000384">
+          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_max_display
+Error: Call to undefined function shortcode_atts()
+
+/Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
+/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:91</error>
+        </testcase>
+        <testcase name="test_oom_ratings_default" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="42" assertions="0" time="0.000370">
+          <error type="Error">HelloElementorChild\Tests\Unit\ShortcodesTest::test_oom_ratings_default
+Error: Call to undefined function shortcode_atts()
+
+/Users/oomhradmin/oombob/unit-test/hello-elementor-child/oom/oom-global-shortcode.php:19
+/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php:45</error>
+        </testcase>
+        <testcase name="test_oom_hero_slider_returns_string" class="HelloElementorChild\Tests\Unit\ShortcodesTest" classname="HelloElementorChild.Tests.Unit.ShortcodesTest" file="/Users/oomhradmin/oombob/unit-test/tests/Unit/ShortcodesTest.php" line="134" assertions="1" time="0.051535"/>
       </testsuite>
     </testsuite>
   </testsuite>

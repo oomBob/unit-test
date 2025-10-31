@@ -34,6 +34,7 @@
             <directory>./hello-elementor-child/template-parts</directory>
             <file>./hello-elementor-child/style.css</file>
             <file>./hello-elementor-child/functions.php</file>
+            <file>./hello-elementor-child/header.php</file>
         </exclude>
         <report>
             <clover outputFile="coverage.xml"/>
@@ -44,6 +45,7 @@
         <ini name="error_reporting" value="E_ALL"/>
         <ini name="display_errors" value="0"/>
         <ini name="display_startup_errors" value="0"/>
+        <ini name="html_errors" value="0"/>
         <ini name="log_errors" value="1"/>
     </php>
 </phpunit>
