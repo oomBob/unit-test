@@ -52,6 +52,20 @@ jobs:
           fi
           echo "Sample of file paths in coverage.xml:"
           grep -o 'file.*path="[^"]*"' coverage.xml | head -5 || echo "No file paths found"
+          
+      - name: Verify sonar-project.properties
+        run: |
+          echo "Checking sonar-project.properties configuration:"
+          cat sonar-project.properties
+          echo ""
+          echo "Verifying coverage path is configured:"
+          if grep -q "sonar.php.coverage.reportPaths" sonar-project.properties; then
+            echo "✓ Coverage report path is configured"
+            grep "sonar.php.coverage.reportPaths" sonar-project.properties
+          else
+            echo "✗ Coverage report path is NOT configured!"
+            exit 1
+          fi
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
