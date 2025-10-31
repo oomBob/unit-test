@@ -54,18 +54,33 @@ jobs:
           php -r "echo 'Xdebug loaded: ' . (extension_loaded('xdebug') ? 'YES' : 'NO') . PHP_EOL;"
           echo ""
           echo "Running PHPUnit tests with coverage generation..."
-          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose || echo "PHPUnit exit code: $?"
+          set +e  # Don't exit on error
+          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose 2>&1 | tee phpunit-output.log
+          PHPUNIT_EXIT_CODE=$?
+          echo ""
+          echo "PHPUnit exit code: $PHPUNIT_EXIT_CODE"
           echo ""
           echo "Checking if coverage.xml was created:"
-          ls -la coverage.xml 2>/dev/null || echo "coverage.xml NOT found!"
           if [ -f coverage.xml ]; then
             echo "✅ coverage.xml exists!"
             echo "File size: $(wc -l < coverage.xml) lines"
-            head -10 coverage.xml
+            echo "First 20 lines:"
+            head -20 coverage.xml
+          else
+            echo "❌ coverage.xml NOT found!"
+            echo ""
+            echo "PHPUnit output (last 50 lines):"
+            tail -50 phpunit-output.log || echo "No phpunit-output.log found"
           fi
           echo ""
           echo "Checking if phpunit-report.xml was created:"
           ls -la phpunit-report.xml 2>/dev/null || echo "phpunit-report.xml NOT found!"
+          # Exit with success if coverage.xml was created, even if tests failed
+          if [ -f coverage.xml ]; then
+            exit 0
+          else
+            exit 1
+          fi
         continue-on-error: true
 
       - name: Verify coverage file exists
