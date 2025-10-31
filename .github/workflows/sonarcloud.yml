@@ -31,8 +31,16 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
       - name: Run PHPUnit tests with coverage
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml
+
+      - name: Verify coverage file exists
         run: |
-          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml || true
+          if [ ! -f coverage.xml ]; then
+            echo "Error: coverage.xml file not found!"
+            exit 1
+          fi
+          echo "Coverage file found:"
+          ls -lh coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
