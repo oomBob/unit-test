@@ -23,9 +23,9 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
-        "test-coverage": "phpunit --coverage-html coverage --coverage-clover coverage.xml",
-        "test-coverage-text": "phpunit --coverage-text"
+        "test": "/opt/homebrew/Cellar/php@8.1/8.1.33/bin/php vendor/bin/phpunit",
+        "test-coverage": "/opt/homebrew/Cellar/php@8.1/8.1.33/bin/php vendor/bin/phpunit --coverage-html coverage --coverage-clover coverage.xml",
+        "test-coverage-text": "/opt/homebrew/Cellar/php@8.1/8.1.33/bin/php vendor/bin/phpunit --coverage-text"
     },
     "config": {
         "allow-plugins": {

@@ -24,7 +24,7 @@ class ShortcodesTest extends TestCase
         Monkey\setUp();
         
         // Load the shortcode files
-        require_once __DIR__ . '/../../../hello-elementor-child/oom/oom-global-shortcode.php';
+        require_once __DIR__ . '/../../hello-elementor-child/oom/oom-global-shortcode.php';
     }
 
     /**

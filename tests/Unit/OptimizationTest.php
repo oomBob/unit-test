@@ -24,7 +24,7 @@ class OptimizationTest extends TestCase
         Monkey\setUp();
         
         // Load the optimization file
-        require_once __DIR__ . '/../../../hello-elementor-child/oom/oom-optimization-security.php';
+        require_once __DIR__ . '/../../hello-elementor-child/oom/oom-optimization-security.php';
     }
 
     /**

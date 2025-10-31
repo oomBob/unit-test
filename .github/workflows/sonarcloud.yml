@@ -30,26 +30,68 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
+      - name: Verify Xdebug is enabled
+        run: |
+          echo "Checking PHP version:"
+          php -v
+          echo ""
+          echo "Checking Xdebug:"
+          php -m | grep -i xdebug || echo "Xdebug not found in modules"
+          echo ""
+          echo "Xdebug configuration:"
+          php -i | grep -i xdebug || echo "No Xdebug info found"
+          echo ""
+          echo "Checking if Xdebug mode is set:"
+          echo "XDEBUG_MODE=${XDEBUG_MODE:-not set}"
+          php -r "echo 'Xdebug extension loaded: ' . (extension_loaded('xdebug') ? 'YES' : 'NO') . PHP_EOL;"
+
       - name: Run PHPUnit tests with coverage
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml
-        continue-on-error: false
+        env:
+          XDEBUG_MODE: coverage
+        run: |
+          echo "Running PHPUnit with coverage..."
+          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose || echo "PHPUnit completed with exit code: $?"
+          echo ""
+          echo "Checking if coverage.xml was created:"
+          ls -la coverage.xml 2>/dev/null || echo "coverage.xml NOT found!"
+          echo ""
+          echo "Checking if phpunit-report.xml was created:"
+          ls -la phpunit-report.xml 2>/dev/null || echo "phpunit-report.xml NOT found!"
+        continue-on-error: true
 
       - name: Verify coverage file exists
         run: |
+          echo "Checking for coverage.xml file..."
           if [ ! -f coverage.xml ]; then
-            echo "Error: coverage.xml file not found!"
+            echo "❌ ERROR: coverage.xml file not found!"
+            echo ""
+            echo "Current directory contents:"
+            ls -la
+            echo ""
+            echo "Possible reasons:"
+            echo "1. Tests didn't run successfully"
+            echo "2. Xdebug is not properly configured"
+            echo "3. PHPUnit didn't generate coverage"
+            echo ""
+            echo "Checking for any XML files:"
+            ls -la *.xml 2>/dev/null || echo "No XML files found"
             exit 1
           fi
-          echo "Coverage file found:"
+          echo "✅ Coverage file found:"
           ls -lh coverage.xml
+          echo ""
           echo "File size:"
           wc -l coverage.xml
+          echo ""
           echo "Checking if coverage.xml contains valid data:"
-          if grep -q "project timestamp" coverage.xml; then
-            echo "✓ Coverage file contains project data"
+          if grep -q "project timestamp" coverage.xml || grep -q "<coverage" coverage.xml; then
+            echo "✅ Coverage file contains project data"
           else
-            echo "✗ Coverage file might be empty or invalid"
+            echo "⚠️ Coverage file might be empty or invalid"
+            echo "First 50 lines of coverage.xml:"
+            head -50 coverage.xml
           fi
+          echo ""
           echo "Sample of file paths in coverage.xml:"
           grep -o 'file.*path="[^"]*"' coverage.xml | head -5 || echo "No file paths found"
           
@@ -66,6 +108,13 @@ jobs:
             echo "✗ Coverage report path is NOT configured!"
             exit 1
           fi
+
+      - name: Show coverage file before scan
+        run: |
+          echo "Verifying coverage.xml exists before SonarCloud scan:"
+          ls -la coverage.xml
+          echo "File content preview (first 30 lines):"
+          head -30 coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

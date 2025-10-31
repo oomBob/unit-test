@@ -24,7 +24,7 @@ class SecurityTest extends TestCase
         Monkey\setUp();
         
         // Load the functions file
-        require_once __DIR__ . '/../../../hello-elementor-child/functions.php';
+        require_once __DIR__ . '/../../hello-elementor-child/functions.php';
     }
 
     /**
