@@ -76,29 +76,9 @@ jobs:
           php -r "echo 'Xdebug loaded: ' . (extension_loaded('xdebug') ? 'YES' : 'NO') . PHP_EOL;"
           echo ""
           echo "Running PHPUnit tests with coverage generation..."
-          set +e  # Don't exit on error
-          # Run PHPUnit and capture all output, then filter out HTML
-          php -d display_errors=0 -d display_startup_errors=0 -d html_errors=0 -d log_errors=1 vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml --verbose > phpunit-raw.log 2>&1 || true
+          # Run PHPUnit with coverage-clover to generate coverage.xml for SonarCloud
+          php -d display_errors=0 -d display_startup_errors=0 -d html_errors=0 -d log_errors=1 vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml
           PHPUNIT_EXIT_CODE=$?
-          # Filter out HTML from the log
-          grep -v "^<" phpunit-raw.log | grep -v "^!" > phpunit-output.log || true
-          echo ""
-          echo "=== PHPUnit Output (filtered) ==="
-          cat phpunit-output.log | head -50
-          echo ""
-          echo "=== Checking if HTML corrupted coverage.xml ==="
-          if [ -f coverage.xml ]; then
-            # Check if coverage.xml contains HTML (shouldn't)
-            if grep -q "^<!" coverage.xml || grep -q "^<html" coverage.xml; then
-              echo "⚠️ WARNING: coverage.xml contains HTML - cleaning it..."
-              # Extract only XML content (everything from first <coverage or <?xml)
-              awk '/^<coverage|^<\?xml/{flag=1} flag' coverage.xml > coverage-clean.xml 2>/dev/null || true
-              if [ -f coverage-clean.xml ] && [ -s coverage-clean.xml ]; then
-                mv coverage-clean.xml coverage.xml
-                echo "✅ Cleaned coverage.xml"
-              fi
-            fi
-          fi
           echo ""
           echo "=== PHPUnit Exit Code: $PHPUNIT_EXIT_CODE ==="
           echo ""
@@ -108,28 +88,12 @@ jobs:
             echo "File size: $(wc -l < coverage.xml) lines"
             echo "First 20 lines:"
             head -20 coverage.xml
+            echo ""
+            echo "✅ Coverage file successfully generated for SonarCloud"
           else
             echo "❌ coverage.xml NOT found!"
-            echo ""
-            echo "=== FULL PHPUnit Output ==="
-            cat phpunit-output.log
-            echo ""
-            echo "=== Searching for coverage-related messages ==="
-            grep -i "coverage\|xdebug\|driver" phpunit-output.log || echo "No coverage messages found"
-            echo ""
-            echo "=== Checking for warnings ==="
-            grep -i "warning" phpunit-output.log || echo "No warnings found"
-          fi
-          echo ""
-          echo "=== Checking if phpunit-report.xml was created ==="
-          ls -la phpunit-report.xml 2>/dev/null || echo "phpunit-report.xml NOT found!"
-          # Exit with success if coverage.xml was created, even if tests failed
-          if [ -f coverage.xml ]; then
-            exit 0
-          else
             exit 1
           fi
-        continue-on-error: true
 
       - name: Verify coverage file exists
         run: |
@@ -185,12 +149,26 @@ jobs:
         run: |
           echo "Verifying coverage.xml exists before SonarCloud scan:"
           ls -la coverage.xml
+          echo ""
           echo "File content preview (first 30 lines):"
           head -30 coverage.xml
+          echo ""
+          echo "Verifying coverage file format (should be Clover XML):"
+          if grep -q '<?xml' coverage.xml && grep -q '<coverage' coverage.xml; then
+            echo "✅ Coverage file is valid Clover XML format"
+          else
+            echo "❌ Coverage file format is invalid"
+            exit 1
+          fi
+          echo ""
+          echo "Checking sonar-project.properties coverage path:"
+          grep "sonar.php.coverage.reportPaths" sonar-project.properties || echo "❌ Coverage path not configured"
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: ${{ github.workspace }}
 
