@@ -31,6 +31,8 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
       - name: Verify Xdebug is enabled
+        env:
+          XDEBUG_MODE: coverage
         run: |
           echo "Checking PHP version:"
           php -v
@@ -39,11 +41,14 @@ jobs:
           php -m | grep -i xdebug || echo "Xdebug not found in modules"
           echo ""
           echo "Xdebug configuration:"
-          php -i | grep -i xdebug || echo "No Xdebug info found"
+          php -i | grep -i xdebug | head -10 || echo "No Xdebug info found"
           echo ""
           echo "Checking if Xdebug mode is set:"
           echo "XDEBUG_MODE=${XDEBUG_MODE:-not set}"
+          echo ""
+          echo "Testing Xdebug extension:"
           php -r "echo 'Xdebug extension loaded: ' . (extension_loaded('xdebug') ? 'YES' : 'NO') . PHP_EOL;"
+          php -r "if (extension_loaded('xdebug')) { echo 'Xdebug version: ' . phpversion('xdebug') . PHP_EOL; } else { echo 'ERROR: Xdebug is NOT loaded!' . PHP_EOL; exit(1); }"
 
       - name: Run PHPUnit tests with coverage
         env:
