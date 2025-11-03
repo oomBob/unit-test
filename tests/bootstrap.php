@@ -31,7 +31,8 @@ if (file_exists(__DIR__ . '/../vendor/wp-phpunit/wp-phpunit/includes/functions.p
 }
 
 // Clean up after tests
-register_shutdown_function(function () {
-    Brain\Monkey\tearDown();
-});
+// Note: Moved tearDown to individual test classes to ensure PHPUnit summary is printed
+// register_shutdown_function(function () {
+//     Brain\Monkey\tearDown();
+// });
 

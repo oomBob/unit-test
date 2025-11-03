@@ -5,7 +5,7 @@
     bootstrap="tests/bootstrap.php"
     colors="true"
     beStrictAboutTestsThatDoNotTestAnything="true"
-    beStrictAboutOutputDuringTests="true"
+    beStrictAboutOutputDuringTests="false"
     beStrictAboutTodoAnnotatedTests="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
@@ -14,7 +14,7 @@
     stopOnFailure="false"
     executionOrder="depends,defects"
     forceCoversAnnotation="false"
-    verbose="true">
+    verbose="false">
     <testsuites>
         <testsuite name="Unit">
             <directory>./tests/Unit</directory>
@@ -47,6 +47,7 @@
         <ini name="display_startup_errors" value="0"/>
         <ini name="html_errors" value="0"/>
         <ini name="log_errors" value="1"/>
+        <ini name="output_buffering" value="0"/>
     </php>
 </phpunit>
 

@@ -43,6 +43,9 @@ class FormFunctionsTest extends TestCase
         // It will work normally
         Monkey\Functions\when('get_option')->justReturn('test-key');
         Monkey\Functions\when('update_option')->justReturn(true);
+        // Suppress error_log output during tests by redirecting to /dev/null
+        // Note: error_log is a PHP internal function, so we use ini_set to redirect it
+        @ini_set('error_log', '/dev/null');
         Monkey\Functions\when('maybe_serialize')->alias(function($data) {
             return is_string($data) ? $data : serialize($data);
         });
@@ -267,6 +270,12 @@ class FormFunctionsTest extends TestCase
      */
     public function test_get_real_meta_data_returns_time()
     {
+        // Set up $_SERVER variables needed by get_real_meta_data
+        $_SERVER['HTTP_USER_AGENT'] = 'Test User Agent';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+        
+        Monkey\Functions\when('get_permalink')->justReturn('https://example.com/page/1');
+        
         $result = get_real_meta_data(1);
         
         $this->assertMatchesRegularExpression('/^\d{2}:\d{2}:\d{2}$/', $result['time']);
