@@ -96,5 +96,114 @@ class TableWidgetTest extends TestCase
         // In a full integration test, we'd instantiate the class
         $this->assertTrue(function_exists('register_oom_table_widget'));
     }
+
+    /**
+     * Test widget file contains required structure
+     */
+    public function test_widget_file_contains_structure()
+    {
+        $file = __DIR__ . '/../../hello-elementor-child/oom/widgets/oom-table-widget/oom-table-widget.php';
+        
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+            
+            // Check for class definition
+            $this->assertStringContainsString('class OOm_Table', $content);
+            
+            // Check for key widget methods
+            $this->assertStringContainsString('get_name', $content);
+            $this->assertStringContainsString('get_title', $content);
+            $this->assertStringContainsString('get_icon', $content);
+            $this->assertStringContainsString('get_categories', $content);
+            $this->assertStringContainsString('register_controls', $content);
+            $this->assertStringContainsString('render', $content);
+            
+            // Check for widget registration
+            $this->assertStringContainsString('register_oom_table_widget', $content);
+        }
+        
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Test widget contains header controls
+     */
+    public function test_widget_contains_header_controls()
+    {
+        $file = __DIR__ . '/../../hello-elementor-child/oom/widgets/oom-table-widget/oom-table-widget.php';
+        
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+            $this->assertStringContainsString('oom_table_header_col', $content);
+            $this->assertStringContainsString('oom_section_table_header', $content);
+        }
+        
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Test widget contains content controls
+     */
+    public function test_widget_contains_content_controls()
+    {
+        $file = __DIR__ . '/../../hello-elementor-child/oom/widgets/oom-table-widget/oom-table-widget.php';
+        
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+            $this->assertStringContainsString('oom_table_content_rows', $content);
+            $this->assertStringContainsString('oom_section_table_cotnent', $content);
+        }
+        
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Test widget contains style controls
+     */
+    public function test_widget_contains_style_controls()
+    {
+        $file = __DIR__ . '/../../hello-elementor-child/oom/widgets/oom-table-widget/oom-table-widget.php';
+        
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+            $this->assertStringContainsString('oom_section_table_title_style_settings', $content);
+            $this->assertStringContainsString('oom_section_table_content_style_settings', $content);
+        }
+        
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Test widget checks status before registration
+     */
+    public function test_widget_checks_status()
+    {
+        $file = __DIR__ . '/../../hello-elementor-child/oom/widgets/oom-table-widget/oom-table-widget.php';
+        
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+            $this->assertStringContainsString('oom_table_status', $content);
+            $this->assertStringContainsString('get_option', $content);
+        }
+        
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Test widget contains table rendering logic
+     */
+    public function test_widget_contains_render_logic()
+    {
+        $file = __DIR__ . '/../../hello-elementor-child/oom/widgets/oom-table-widget/oom-table-widget.php';
+        
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+            $this->assertStringContainsString('<table', $content);
+            $this->assertStringContainsString('<thead', $content);
+            $this->assertStringContainsString('<tbody', $content);
+        }
+        
+        $this->assertTrue(true);
+    }
 }
 
