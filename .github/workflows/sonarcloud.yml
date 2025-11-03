@@ -197,4 +197,26 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: ${{ github.workspace }}
+        continue-on-error: false
+
+      - name: Workflow Summary
+        if: always()
+        run: |
+          echo "=== SonarCloud Workflow Summary ==="
+          echo ""
+          echo "✅ If you see this message, all workflow steps completed"
+          echo ""
+          echo "Next steps:"
+          echo "1. Check SonarCloud dashboard: https://sonarcloud.io"
+          echo "2. Navigate to your project: oomBob_unit-test"
+          echo "3. Review Quality Gate status"
+          echo ""
+          echo "⚠️  Important: Quality Gate may show as 'Failed' even if scan succeeded"
+          echo "   This is due to security hotspots requirement (needs 100% review)"
+          echo "   To fix this, see instructions in sonar-project.properties"
+          echo ""
+          echo "Common workflow failure causes:"
+          echo "- Invalid SONAR_TOKEN (generate new token in SonarCloud)"
+          echo "- Project key mismatch (check sonar-project.properties)"
+          echo "- Organization access issues (verify token permissions)"
 

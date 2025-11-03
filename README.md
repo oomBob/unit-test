@@ -193,6 +193,33 @@ You can modify exclusions in `phpunit.xml` and `sonar-project.properties`.
 - Check `sonar-project.properties` has correct project key
 - Review GitHub Actions logs for errors
 
+### Automatic Analysis conflict error
+
+If you see: **"You are running CI analysis while Automatic Analysis is enabled"**
+
+- This means Automatic Analysis is enabled in SonarCloud, which conflicts with your CI/CD workflow
+- **Fix**: Disable Automatic Analysis in SonarCloud project settings
+- **See**: [FIX_AUTOMATIC_ANALYSIS.md](FIX_AUTOMATIC_ANALYSIS.md) for detailed instructions
+
+### Coverage shows "not enough lines"
+
+If you see: **"There are not enough lines to compute coverage"** in the New Code tab
+
+- This is normal when the new code period is short or has minimal changes
+- **Fix**: Switch to the **"Overall Code"** tab to see full project coverage
+- Coverage data is being generated correctly - it just appears in the "Overall Code" tab
+- **See**: [FIX_COVERAGE_NOT_ENOUGH_LINES.md](FIX_COVERAGE_NOT_ENOUGH_LINES.md) for explanation
+
+### Coverage is low (e.g., 1.9%)
+
+If your coverage percentage is low:
+
+- **Current situation**: Coverage reflects actual test coverage of your code
+- **Low coverage means**: Many files have no tests or minimal tests
+- **How to improve**: Write more tests for uncovered files
+- **Priority**: Focus on large files first (biggest impact)
+- **See**: [IMPROVE_COVERAGE.md](IMPROVE_COVERAGE.md) for a complete strategy to improve coverage to 80%
+
 ## 📚 Resources
 
 - [PHPUnit Documentation](https://phpunit.de/documentation.html)
