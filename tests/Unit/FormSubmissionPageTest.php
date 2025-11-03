@@ -408,17 +408,20 @@ class FormSubmissionPageTest extends TestCase
                 return true;
             });
         
-        // wp_die is mocked in setUp to just return
-        // Just verify the function can be called without errors
-        try {
-            oom_handle_delete_submission();
-            $result = true;
-        } catch (\Exception $e) {
-            $result = false;
-        }
+        // Mock wp_die to throw exception when nonce fails (simulating script termination)
+        Monkey\Functions\when('wp_die')->alias(function($message) {
+            throw new \Exception('wp_die: ' . $message);
+        });
         
-        // Function should execute without throwing exceptions
-        $this->assertTrue($result !== false);
+        // Mock wp_redirect to prevent exit() from being called
+        Monkey\Functions\when('wp_redirect')->justReturn();
+        Monkey\Functions\when('admin_url')->returnArg();
+        
+        // Function should call wp_die when nonce verification fails
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('wp_die: Security check failed.');
+        
+        oom_handle_delete_submission();
     }
 
     /**

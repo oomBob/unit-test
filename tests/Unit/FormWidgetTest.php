@@ -41,7 +41,7 @@ class FormWidgetTest extends TestCase
         
         // Mock Elementor Plugin
         if (!class_exists('\Elementor\Plugin')) {
-            class_alias('\stdClass', '\Elementor\Plugin');
+            eval('namespace Elementor { class Plugin {} }');
         }
         
         // Mock Elementor\Plugin::instance()->widgets_manager

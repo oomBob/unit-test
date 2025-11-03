@@ -23,6 +23,10 @@ class FormFunctionsTest extends TestCase
         parent::setUp();
         Monkey\setUp();
         
+        // Mock $_SERVER variables for testing
+        $_SERVER['HTTP_USER_AGENT'] = 'PHPUnit Test Agent';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+        
         // Mock WordPress functions
         Monkey\Functions\when('add_action')->justReturn();
         Monkey\Functions\when('wp_send_json_error')->justReturn();
