@@ -75,14 +75,37 @@ jobs:
           echo "XDEBUG_MODE is set to: $XDEBUG_MODE"
           php -r "echo 'Xdebug loaded: ' . (extension_loaded('xdebug') ? 'YES' : 'NO') . PHP_EOL;"
           echo ""
+          # Verify PHPUnit can detect Xdebug for coverage
+          echo "Verifying PHPUnit coverage capability:"
+          vendor/bin/phpunit --version
+          vendor/bin/phpunit --help | grep -i coverage | head -5 || echo "No coverage help found"
+          echo ""
           echo "Running PHPUnit tests with coverage generation..."
-          # Run PHPUnit with coverage-clover to generate coverage.xml for SonarCloud
+          # Run PHPUnit with coverage-clover to explicitly enable coverage generation
           # Use set +e to continue even if tests fail, so coverage can still be generated
           set +e
           # Run with coverage - errors should not prevent coverage generation
-          php -d display_errors=0 -d display_startup_errors=0 -d html_errors=0 -d log_errors=1 vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml 2>&1 | tee phpunit-output.log || true
+          # For PHPUnit 9.x with Xdebug 3.x, we need --coverage-clover to enable coverage
+          # The phpunit.xml already has coverage configuration with include/exclude paths
+          # When using --coverage-clover, PHPUnit should use the XML coverage settings
+          echo "PHPUnit command: vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml"
+          echo "Note: Coverage settings (include/exclude) are configured in phpunit.xml"
+          echo ""
+          echo "Running PHPUnit with coverage..."
+          # Run PHPUnit with coverage - capture output and exit code
+          vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit-report.xml 2>&1 | tee phpunit-output.log || true
           PHPUNIT_EXIT_CODE=${PIPESTATUS[0]}
           set -e
+          
+          # Check if coverage was generated immediately after running
+          echo ""
+          echo "Checking immediately after PHPUnit run:"
+          if [ -f coverage.xml ]; then
+            echo "✅ coverage.xml found immediately after run"
+            ls -lh coverage.xml
+          else
+            echo "⚠️ coverage.xml not found immediately after run"
+          fi
           echo ""
           echo "=== PHPUnit Exit Code: $PHPUNIT_EXIT_CODE ==="
           echo ""
@@ -115,7 +138,13 @@ jobs:
             php -r "if (extension_loaded('xdebug')) { \$config = ini_get_all('xdebug'); echo 'Xdebug ini settings: '; print_r(array_filter(\$config, function(\$k) { return strpos(\$k, 'coverage') !== false || strpos(\$k, 'mode') !== false; }, ARRAY_FILTER_USE_KEY)); }"
             echo ""
             echo "Trying to generate coverage with verbose output:"
-            php -d display_errors=1 -d display_startup_errors=1 vendor/bin/phpunit --coverage-clover=coverage.xml --verbose 2>&1 | tail -50
+            # Try with explicit coverage flag and verbose output
+            # First, test if coverage can be generated at all
+            echo "Testing coverage generation capability:"
+            php -r "if (!extension_loaded('xdebug')) { echo 'ERROR: Xdebug not loaded!\n'; exit(1); } echo 'Xdebug version: ' . phpversion('xdebug') . PHP_EOL;"
+            echo ""
+            echo "Running PHPUnit with verbose and coverage:"
+            vendor/bin/phpunit --coverage-clover=coverage.xml --verbose --testdox 2>&1 | tail -100
             if [ -f coverage.xml ]; then
               echo "✅ coverage.xml generated on retry!"
             else
