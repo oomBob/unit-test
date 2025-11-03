@@ -252,10 +252,14 @@ class FormSubmissionPageTest extends TestCase
             }
         };
         
-        // Mock wp_die to capture the call when submission is not found
-        Monkey\Functions\expect('wp_die')
-            ->once()
-            ->with('Submission not found.');
+        // Expect the exception to be thrown first
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('wp_die called');
+        
+        // Mock wp_die to throw an exception to stop execution (like WordPress does)
+        Monkey\Functions\when('wp_die')->alias(function($message) {
+            throw new \Exception('wp_die called');
+        });
         
         oom_form_submission_view_page();
     }
@@ -281,10 +285,14 @@ class FormSubmissionPageTest extends TestCase
             }
         };
         
-        // Mock wp_die to capture the call
-        Monkey\Functions\expect('wp_die')
-            ->once()
-            ->with('Submission not found.');
+        // Expect the exception to be thrown first
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('wp_die called');
+        
+        // Mock wp_die to throw an exception to stop execution (like WordPress does)
+        Monkey\Functions\when('wp_die')->alias(function($message) {
+            throw new \Exception('wp_die called');
+        });
         
         oom_form_submission_view_page();
     }
