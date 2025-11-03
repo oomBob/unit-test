@@ -4,6 +4,7 @@ composer.lock
 
 # PHPUnit
 /coverage/
+coverage_single/
 coverage.xml
 .phpunit.result.cache
 
