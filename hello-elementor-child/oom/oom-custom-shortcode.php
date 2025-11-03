@@ -9,10 +9,8 @@
  
 add_shortcode('current_year', 'current_year_shortcode');
 function current_year_shortcode() {
-    ob_start();
     $year = date('Y');
     return $year;
-    ob_get_clean();
 }
 
 // Ensure this only runs in WordPress context
