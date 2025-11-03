@@ -164,8 +164,34 @@ jobs:
           echo "Checking sonar-project.properties coverage path:"
           grep "sonar.php.coverage.reportPaths" sonar-project.properties || echo "❌ Coverage path not configured"
 
+      - name: Verify SonarCloud Token Configuration
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -z "$SONAR_TOKEN" ]; then
+            echo "❌ ERROR: SONAR_TOKEN secret is not set!"
+            echo ""
+            echo "Please add the SONAR_TOKEN secret in GitHub repository settings:"
+            echo "1. Go to: Settings → Secrets and variables → Actions"
+            echo "2. Click: New repository secret"
+            echo "3. Name: SONAR_TOKEN"
+            echo "4. Value: (paste your SonarCloud token from My Account → Security)"
+            echo "5. Click: Add secret"
+            exit 1
+          fi
+          echo "✅ SONAR_TOKEN secret is configured"
+          TOKEN_LEN=${#SONAR_TOKEN}
+          echo "Token length: $TOKEN_LEN characters"
+          # SonarCloud tokens are typically 40+ characters
+          if [ "$TOKEN_LEN" -lt 20 ]; then
+            echo "⚠️ WARNING: Token seems too short (expected 40+ characters)"
+            echo "   This might indicate an incorrect token format"
+          else
+            echo "✅ Token length looks correct"
+          fi
+
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarcloud-github-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
