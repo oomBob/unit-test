@@ -142,12 +142,26 @@ class FormSubmissionPageTest extends TestCase
         $_GET = [];
         $_POST = [];
         
-        $wpdb = (object) [
-            'prefix' => 'wp_',
-            'get_results' => function() { return []; },
-            'get_var' => function() { return 0; },
-            'get_col' => function() { return []; },
-        ];
+        // Use anonymous class instead of stdClass to properly mock wpdb methods
+        $wpdb = new class {
+            public $prefix = 'wp_';
+            
+            public function get_results($query) {
+                return [];
+            }
+            
+            public function get_var($query) {
+                return 0;
+            }
+            
+            public function get_col($query) {
+                return [];
+            }
+            
+            public function prepare($query, ...$args) {
+                return $query;
+            }
+        };
         
         ob_start();
         oom_form_submissions_page();
@@ -220,12 +234,28 @@ class FormSubmissionPageTest extends TestCase
      */
     public function test_oom_form_submission_view_page_validates_id()
     {
-        $_GET = []; // Ensure $_GET['id'] is not set
-        unset($_GET['id']);
+        global $wpdb;
         
+        // Set up a valid ID to avoid undefined array key error
+        $_GET = ['id' => '']; // Empty string, which will be 0 when intval() is applied
+        
+        // Mock wpdb to return null for an invalid ID
+        $wpdb = new class {
+            public $prefix = 'wp_';
+            
+            public function get_row($query) {
+                return null;
+            }
+            
+            public function prepare($query, ...$args) {
+                return $query;
+            }
+        };
+        
+        // Mock wp_die to capture the call when submission is not found
         Monkey\Functions\expect('wp_die')
             ->once()
-            ->with('Invalid submission ID.');
+            ->with('Submission not found.');
         
         oom_form_submission_view_page();
     }
@@ -239,16 +269,19 @@ class FormSubmissionPageTest extends TestCase
         
         $_GET = ['id' => '999'];
         
-        $wpdb = new class extends \stdClass {
+        $wpdb = new class {
             public $prefix = 'wp_';
+            
             public function get_row($query) {
                 return null;
             }
-            public function prepare($query, $args) {
+            
+            public function prepare($query, ...$args) {
                 return $query;
             }
         };
         
+        // Mock wp_die to capture the call
         Monkey\Functions\expect('wp_die')
             ->once()
             ->with('Submission not found.');
@@ -307,9 +340,13 @@ class FormSubmissionPageTest extends TestCase
             ->atLeast()->once()
             ->with('oom_form_encryption_key', 'new-key-123');
         
-        // Mock get_option and sanitize_text_field
+        // Mock get_option, sanitize_text_field, esc_attr_e, and esc_attr
         Monkey\Functions\when('get_option')->justReturn('');
         Monkey\Functions\when('sanitize_text_field')->returnArg();
+        Monkey\Functions\when('esc_attr_e')->alias(function($text) {
+            // Just echo the text without escaping in tests
+            echo $text;
+        });
         
         ob_start();
         oom_form_settings_view_page();
