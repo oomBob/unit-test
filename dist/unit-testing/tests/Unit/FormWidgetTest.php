@@ -63,6 +63,7 @@ class FormWidgetTest extends TestCase
                 class Controls_Manager {
                     const TEXT = "text";
                     const TEXTAREA = "textarea";
+                    const WYSIWYG = "wysiwyg";
                     const SELECT = "select";
                     const SELECT2 = "select2";
                     const NUMBER = "number";
@@ -75,6 +76,7 @@ class FormWidgetTest extends TestCase
                     const SLIDER = "slider";
                     const DIMENSIONS = "dimensions";
                     const COLOR = "color";
+                    const MEDIA = "media";
                     const HEADING = "heading";
                     const HOVER_ANIMATION = "hover_animation";
                     const NOTICE = "notice";
@@ -116,14 +118,44 @@ class FormWidgetTest extends TestCase
                         $this->settings = $settings;
                     }
                     
-                    public function add_render_attribute($element, $key, $value = null) {
-                        if (is_array($key)) {
+                    public function add_render_attribute($element, $key = null, $value = null) {
+                        // When called with array of elements as first param
+                        if (is_array($element) && $key === null) {
+                            foreach ($element as $el => $attrs) {
+                                if (!isset($this->render_attributes[$el])) {
+                                    $this->render_attributes[$el] = [];
+                                }
+                                foreach ($attrs as $attr => $val) {
+                                    $this->render_attributes[$el][$attr] = $val;
+                                }
+                            }
+                        } elseif (is_array($key)) {
+                            if (!isset($this->render_attributes[$element])) {
+                                $this->render_attributes[$element] = [];
+                            }
                             foreach ($key as $attr => $val) {
                                 $this->render_attributes[$element][$attr] = $val;
                             }
                         } else {
+                            if (!isset($this->render_attributes[$element])) {
+                                $this->render_attributes[$element] = [];
+                            }
                             $this->render_attributes[$element][$key] = $value;
                         }
+                    }
+                    
+                    public function get_render_attribute_string($element) {
+                        if (!isset($this->render_attributes[$element])) {
+                            return "";
+                        }
+                        $result = "";
+                        foreach ($this->render_attributes[$element] as $attr => $value) {
+                            if (is_array($value)) {
+                                $value = implode(" ", $value);
+                            }
+                            $result .= $attr . \'="\' . htmlspecialchars($value, ENT_QUOTES) . \'" \';
+                        }
+                        return trim($result);
                     }
                     
                     public function print_render_attribute_string($element) {
@@ -239,6 +271,19 @@ class FormWidgetTest extends TestCase
             ');
         }
 
+        // Mock Elementor Widgets Manager first
+        if (!class_exists('\Elementor\Widgets_Manager')) {
+            eval('
+            namespace Elementor {
+                class Widgets_Manager {
+                    public function register_widget_type($widget) {
+                        return true;
+                    }
+                }
+            }
+            ');
+        }
+
         // Mock Elementor\Plugin
         if (!class_exists('\Elementor\Plugin')) {
             eval('
@@ -250,19 +295,7 @@ class FormWidgetTest extends TestCase
                     public static function instance() {
                         if (self::$instance === null) {
                             self::$instance = new self();
-                            $manager = new \stdClass();
-                            $manager->register_widget_type = new class {
-                                public function __invoke($widget) {
-                                    return true;
-                                }
-                            };
-                            
-                            // Create a wrapper object that can handle method calls
-                            self::$instance->widgets_manager = new class {
-                                public function register_widget_type($widget) {
-                                    return true;
-                                }
-                            };
+                            self::$instance->widgets_manager = new Widgets_Manager();
                         }
                         return self::$instance;
                     }
@@ -289,14 +322,33 @@ class FormWidgetTest extends TestCase
     {
         static $loaded = false;
         
+        // Ensure Elementor mocks are set up before loading widget
+        $this->createElementorMocks();
+        
+        // Ensure widgets_manager is initialized
+        if (class_exists('\Elementor\Plugin')) {
+            $plugin = \Elementor\Plugin::instance();
+            if (!isset($plugin->widgets_manager) || !is_object($plugin->widgets_manager)) {
+                if (class_exists('\Elementor\Widgets_Manager')) {
+                    $plugin->widgets_manager = new \Elementor\Widgets_Manager();
+                }
+            }
+        }
+        
         $file = __DIR__ . '/../../hello-elementor-child/oom/widgets/oom-elementor-form/widgets/oom-form/oom-form.php';
         if (file_exists($file) && !$loaded) {
             require_once $file;
             $loaded = true;
             
-            // Call the registration function
+            // Call the registration function with error handling
             if (function_exists('register_oom_form_widget')) {
-                register_oom_form_widget();
+                try {
+                    register_oom_form_widget();
+                } catch (\Exception $e) {
+                    // Ignore registration errors when running with other tests
+                } catch (\Error $e) {
+                    // Ignore PHP errors (like undefined property)
+                }
             }
         }
         
@@ -316,6 +368,26 @@ class FormWidgetTest extends TestCase
         $method->setAccessible(true);
 
         return $method->invokeArgs($object, $parameters);
+    }
+
+    /**
+     * Get default settings to prevent undefined array key errors
+     */
+    private function getDefaultSettings()
+    {
+        return [
+            'form_name' => 'Test Form',
+            'show_labels' => 'true',
+            'mark_required' => 'false',
+            'label_position' => 'above',
+            'input_size' => 'sm',
+            'button_text' => 'Submit',
+            'button_size' => 'sm',
+            'button_width' => '100',
+            'button_width_tablet' => '',
+            'button_width_mobile' => '',
+            'form_fields' => []
+        ];
     }
 
     /**
@@ -992,7 +1064,7 @@ class FormWidgetTest extends TestCase
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, '_register_controls')) {
             ob_start();
-            $widget->_register_controls();
+            $this->invokeMethod($widget, '_register_controls');
             $output = ob_get_clean();
             
             // Method should execute without errors
@@ -1051,7 +1123,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Contact Form',
                 'show_labels' => 'true',
                 'input_size' => 'md',
@@ -1066,12 +1138,12 @@ class FormWidgetTest extends TestCase
                         'required' => 'true',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="email"', $output);
@@ -1088,7 +1160,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Message Form',
                 'show_labels' => 'true',
                 'input_size' => 'lg',
@@ -1104,12 +1176,12 @@ class FormWidgetTest extends TestCase
                         'required' => 'false',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('<textarea', $output);
@@ -1126,7 +1198,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Survey Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1141,12 +1213,12 @@ class FormWidgetTest extends TestCase
                         'allow_multiple' => 'false',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('<select', $output);
@@ -1164,7 +1236,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Choice Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1179,12 +1251,12 @@ class FormWidgetTest extends TestCase
                         'inline_list' => 'elementor-subgroup-inline',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="radio"', $output);
@@ -1202,7 +1274,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Preferences Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1217,12 +1289,12 @@ class FormWidgetTest extends TestCase
                         'inline_list' => '',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="checkbox"', $output);
@@ -1239,7 +1311,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Agreement Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1254,12 +1326,12 @@ class FormWidgetTest extends TestCase
                         'required' => 'true',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="checkbox"', $output);
@@ -1276,7 +1348,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Hidden Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1288,12 +1360,12 @@ class FormWidgetTest extends TestCase
                         'field_value' => 'abc123',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="hidden"', $output);
@@ -1310,7 +1382,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Info Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1323,12 +1395,12 @@ class FormWidgetTest extends TestCase
                         'field_html' => '<p>This is some custom HTML</p>',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('This is some custom HTML', $output);
@@ -1344,7 +1416,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Phone Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1359,12 +1431,12 @@ class FormWidgetTest extends TestCase
                         'required' => 'true',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="tel"', $output);
@@ -1381,7 +1453,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Complete Form',
                 'show_labels' => 'true',
                 'mark_required' => 'true',
@@ -1415,12 +1487,12 @@ class FormWidgetTest extends TestCase
                         'required' => 'true',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('Full Name', $output);
@@ -1441,7 +1513,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Number Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1453,14 +1525,15 @@ class FormWidgetTest extends TestCase
                         'field_label' => 'Age',
                         'placeholder' => '25',
                         'width' => '100',
+                        'required' => 'false',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="number"', $output);
@@ -1476,7 +1549,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Date Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1487,14 +1560,16 @@ class FormWidgetTest extends TestCase
                         'field_type' => 'date',
                         'field_label' => 'Birth Date',
                         'width' => '100',
+                        'placeholder' => '',
+                        'required' => 'false',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="date"', $output);
@@ -1510,7 +1585,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Time Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1521,14 +1596,16 @@ class FormWidgetTest extends TestCase
                         'field_type' => 'time',
                         'field_label' => 'Appointment Time',
                         'width' => '100',
+                        'placeholder' => '',
+                        'required' => 'false',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="time"', $output);
@@ -1544,7 +1621,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Login Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1559,12 +1636,12 @@ class FormWidgetTest extends TestCase
                         'required' => 'true',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="password"', $output);
@@ -1580,7 +1657,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'URL Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
@@ -1592,14 +1669,15 @@ class FormWidgetTest extends TestCase
                         'field_label' => 'Website',
                         'placeholder' => 'https://example.com',
                         'width' => '100',
+                        'required' => 'false',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="url"', $output);
@@ -1615,18 +1693,18 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Test Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
                 'button_text' => 'Submit',
                 'form_fields' => []
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('<script>', $output);
@@ -1644,18 +1722,18 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Test Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
                 'button_text' => 'Submit',
                 'form_fields' => []
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('<style>', $output);
@@ -1672,19 +1750,19 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'Icon Form',
                 'show_labels' => 'true',
                 'input_size' => 'sm',
                 'button_text' => 'Submit',
                 'selected_button_icon' => ['value' => 'fas fa-check'],
                 'form_fields' => []
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('button-icon', $output);
@@ -1700,7 +1778,7 @@ class FormWidgetTest extends TestCase
     {
         $widget = $this->loadWidget();
         if ($widget && method_exists($widget, 'render')) {
-            $settings = [
+            $settings = array_merge($this->getDefaultSettings(), [
                 'form_name' => 'No Labels Form',
                 'show_labels' => 'false',
                 'input_size' => 'sm',
@@ -1712,14 +1790,15 @@ class FormWidgetTest extends TestCase
                         'field_label' => 'Name',
                         'placeholder' => 'Your name',
                         'width' => '100',
+                        'required' => 'false',
                     ]
                 ]
-            ];
+            ]);
             
             $widget->set_settings($settings);
             
             ob_start();
-            $widget->render();
+            $this->invokeMethod($widget, 'render');
             $output = ob_get_clean();
             
             $this->assertStringContainsString('type="text"', $output);

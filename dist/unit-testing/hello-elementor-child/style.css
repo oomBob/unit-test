@@ -1,0 +1,873 @@
+/* 
+Theme Name: Hello Elementor Child (DLP & Website)
+Theme URI: https://github.com/elementor/hello-theme/
+Description: Hello Elementor Child is a child theme of Hello Elementor, created by Elementor team
+Author: Elementor Team
+Author URI: https://elementor.com/
+Template: hello-elementor
+Version: 1.6.3
+Text Domain: hello-elementor-child
+License: GNU General Public License v3 or later.
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
+Tags: flexible-header, custom-colors, custom-menu, custom-logo, editor-style, featured-images, rtl-language-support, threaded-comments, translation-ready
+*/
+
+/*
+ *  oom_ss
+*/
+
+@media(min-width:1920.98px){
+	.oom-innerpage-main-banner {
+		max-height: 800px;
+		min-height: 800px;
+	}
+	
+	.e-con-inner {
+		max-width: 1800px !important;
+	}
+}
+@media(max-width:1920px){
+	.oom-innerpage-main-banner {
+		max-height: 50vh;
+		min-height: 50vh;
+	}
+}
+
+@media(min-width:2000.98px){
+	.oom-home-banner {
+		max-width: 1800px !important;
+	}
+}
+
+
+/* Calendar  */
+/* Ensure jQuery UI datepicker overlays within popups and doesn't trigger outside-click closes */
+.ui-datepicker { 
+  z-index: 99999999 !important; 
+}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year, div#ui-datepicker-div {
+    font-family: 'Poppins' !important;
+}
+
+/* Prevent JetPopup overlay from capturing clicks over datepicker */
+.jet-popup__container .ui-datepicker, 
+.jet-popup__container-inner .ui-datepicker, 
+.elementor-popup-modal .ui-datepicker {
+  pointer-events: auto;
+}
+
+/* Additional Jet Engine popup datepicker enhancements */
+.jet-popup__container .ui-datepicker,
+.jet-popup__container-inner .ui-datepicker {
+  z-index: 999999999 !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 300px !important;
+  max-width: 90vw !important;
+  background: white !important;
+  border: 1px solid #ddd !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Ensure datepicker is above Jet Engine popup elements */
+.jet-popup__container .ui-datepicker,
+.jet-popup__container-inner .ui-datepicker {
+  z-index: 999999999 !important;
+}
+
+/* Mobile-specific Jet Engine popup datepicker adjustments */
+@media (max-width: 768px) {
+  .jet-popup__container .ui-datepicker,
+  .jet-popup__container-inner .ui-datepicker {
+    width: 280px !important;
+    max-width: 95vw !important;
+    font-size: 14px !important;
+  }
+  
+  .jet-popup__container .ui-datepicker td a,
+  .jet-popup__container-inner .ui-datepicker td a {
+    padding: 8px 4px !important;
+    font-size: 14px !important;
+    min-height: 32px !important;
+  }
+  
+  .jet-popup__container .ui-datepicker .ui-datepicker-title,
+  .jet-popup__container-inner .ui-datepicker .ui-datepicker-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+}
+
+/* Navigation */
+.oom-main-menu ul.sub-menu {
+	width: 240px !important;
+}
+
+
+/* Contact Form Message */
+.form-message {
+    display: none;
+}
+
+/* Home Carousel - Start */
+.oom-home-carousel .swiper {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.oom-home-carousel .swiper.swiper-initialized {
+    opacity: 1;
+}
+/* Home Carousel - End */
+
+html {
+	overflow-x: hidden;
+}
+.iti.iti--allow-dropdown.iti--show-flags {
+    width: 100%;
+}
+.oom-main-menu a {
+    cursor: pointer;
+}
+
+#oom-close-info-bar{
+	cursor: pointer;
+}
+
+.jet-popup__close-button {
+    background: white !important;
+    border-radius: 50% !important;
+    position: absolute;
+    top: -2% !important;
+}
+
+.jet-popup__close-button svg path {
+    fill: black !important;
+}
+
+@media(max-width:767px){
+	.jet-popup__close-button {
+		top: 0% !important;
+		transform: scale(0.8)!important;
+	}
+}
+/* .jet-popup__container {
+    max-width: 70% ! IMPORTANT;
+}
+.jet-popup__container-inner {
+    background: transparent !important;
+}
+@media(min-width:1441px){
+	.jet-popup__close-button {
+
+		top: -4% !important;
+		left: 107% !important;
+	}
+}
+.jet-popup__close-button {
+	float: right;
+	position: absolute !important;
+    top: 0%;
+    left: 104%;
+	background: white !important;
+	padding: 6px;
+	border-radius: 50% !important;
+} */
+
+
+/* @media(max-width: 1024px){
+	#jet-popup-2127 .jet-popup__close-button {
+		left: 105%;
+	}
+}
+@media(max-width:560px){
+	#jet-popup-2127 .jet-popup__close-button {
+		left: 115%;
+        top: -6% !important;
+	}
+} */
+
+p.comment-form-cookies-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+@media(min-width:1280.99px){
+	li.oom-hide-menu {
+		display: none !important;
+	}
+}
+
+/* .jet-popup__container-inner {
+    background-color: #0000009c!important;
+}
+.jet-popup__close-button svg {
+    padding: 5px;
+	background: white;
+	border-radius: 50%;
+} */
+
+
+/** Elementor Container **/
+.oom-full-viewport {
+	width: 100vw !important;
+}
+
+.oom-constraint-width, .oom-fixed-width {
+/* 	max-width: 1920px!important; */
+	max-width: 1600px!important;
+	width: 90% !important;
+	box-sizing: border-box;
+	margin:0 auto;
+}
+
+.oom-constraint-width-80 {
+/* 	max-width: 1920px;  */
+	max-width: 1600px;
+	width: 80% !important;
+	box-sizing: border-box;
+	margin:0 auto;
+}
+
+/*
+.oom-elementor.e-parent {
+	width: 90%;
+	margin: 0px auto;
+}*/
+
+#global-footer .top,
+.oom-elementor-full-width.e-parent .e-con-boxed {
+	width: 90%;
+	margin: 0px auto;
+}
+.oom-full-w{
+	width: 100%!important;
+}
+.oom-elementor-full-width.e-parent {
+	width: 100%;
+	margin: 0px auto;
+}
+
+.oom-elementor.e-parent .e-con-inner > .e-con-inner {
+  	width: 100%;
+}
+
+.e-loop-item .e-parent .e-con-inner {
+	width: 100%;
+}
+
+
+/** Swiper Style **/
+#oom-hero-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #fff;
+}
+
+#oom-hero-slider .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    opacity: 0.5;
+}
+
+/** Hide Default Arrows **/
+.swiper-button-next i {
+    color: #ffffff;
+}
+
+.swiper-button-next i:hover {
+    color: #ffffff;
+}
+
+.swiper-button-next::after, 
+.swiper-button-prev::after {
+    content: ""!important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+	background-image: none;
+}
+
+.swiper-button-next:after, 
+.swiper-button-prev:after {
+	display: none;
+}
+
+
+/** Custom Display Ratings/Stars **/
+.fa-star.checked {
+	color: #F4D174;
+}
+
+.fa-star {
+	color: #808080;
+}
+
+
+/** Custom Pagination **/
+.oom-pagination {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.oom-pagination ul {
+    margin: 0; padding: 0;
+    
+}
+.oom-pagination ul li {
+    font-weight: bold;
+    display: inline; 
+    margin: 5px; 
+    padding: 10px 15px;
+    background: #FFF; 
+    border-radius: 5px;
+	box-shadow: 0px 0px 5px 0px rgb(55 55 204 / 15%);
+    color: #000000; 
+}
+.oom-pagination ul li.active:hover {
+    cursor: pointer; 
+    background: #222222;
+    color: #FFFFFF 
+}
+.oom-pagination ul li.inactive {
+    /*background: #B8B8B8; */
+    color: #e6e6e6;
+}
+
+.oom-pagination ul li.previous-btn.active,
+.oom-pagination ul li.previous-btn.inactive,
+.oom-pagination ul li.next-btn.active,
+.oom-pagination ul li.next-btn.inactive {
+    box-shadow: none;
+}
+
+.oom-pagination ul li.selected {
+    background: #333333;
+	border: 1px solid #333333;
+    color: #FFF;
+}
+
+
+
+/** Slick Slider Flickering Issue Solution **/
+.htslider-slider .slick-dots {
+    margin-bottom: 20px;
+}
+
+.slick-slide,
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+/** Rows and Columns */
+.oom_column_100 {
+    float: left;
+    width: 100%;
+}
+
+.oom_column_90 {
+    float: left;
+    width: 90%;
+}
+
+.oom_column_80 {
+    float: left;
+    width: 80%;
+}
+
+.oom_column_70 {
+    float: left;
+    width: 70%;
+}
+
+.oom_column_60 {
+    float: left;
+    width: 60%;
+}
+
+.oom_column_50 {
+    float: left;
+    width: 50%;
+}
+
+.oom_column_40 {
+    float: left;
+    width: 40%;
+}
+
+.oom_column_33_33 {
+    float: left;
+    width: 33.33%;
+}
+
+.oom_column_33 {
+    float: left;
+    width: 33%;
+}
+
+.oom_column_30 {
+    float: left;
+    width: 30%;
+}
+
+.oom_column_25 {
+    float: left;
+    width: 25%;
+}
+
+.oom_column_20 {
+    float: left;
+    width: 20%;
+}
+
+.oom_column_10 {
+    float: left;
+    width: 10%;
+}
+
+/* Clear floats after the columns */
+.oom_row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/** Cover Spin Loading **/
+#oom-cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+    display:none;
+}
+
+#oom-cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:calc(50% - 22px);
+    top:calc(50% - 22px);
+    width:44px;
+    height:44px;
+    border-style:solid;
+    border-color:black;
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    -moz-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    from {-webkit-transform:rotate(0deg);}
+    to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+
+/* Single Blog */
+.oom-post-share-btn .elementor-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.oom-news-excerpt .jet-listing-dynamic-field__content {
+	overflow: hidden;
+    display: block;
+    -webkit-line-clamp: 2;
+    display: box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+	
+}
+/* Base styling */
+.oom-news-taxo-filter fieldset {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+.oom-news-taxo-filter span.jet-radio-list__decorator {
+    display: none;
+}
+.oom-news-taxo-filter .jet-radio-list__item {
+	display: block;
+	cursor: pointer;
+}
+
+.oom-news-taxo-filter .jet-radio-list__input {
+	display: none;
+}
+
+/* Style all buttons */
+.oom-news-taxo-filter .jet-radio-list__button {
+    padding: 10px 24px!important;
+    border: 2px solid #f0f0f0!important;
+    border-radius: 10px!important;
+    background-color: #f0f0f0!important;
+	border-radius: 50px!important;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+/* Style on hover */
+.oom-news-taxo-filter .jet-radio-list__item:hover .jet-radio-list__button {
+	background-color: #00148C!important;
+	border-color: #00148C!important;
+	color: #fff!important;
+}
+
+/* Style the selected one */
+.oom-news-taxo-filter .jet-radio-list__input:checked + .jet-radio-list__button {
+	background-color: #00148C!important;
+	border-color: #00148C!important;
+	color: #fff!important;
+}
+
+/* Optional: change icon color if needed */
+.oom-news-taxo-filter .jet-radio-list__input:checked + .jet-radio-list__button .jet-radio-list__checked-icon svg path {
+	fill: #fff;
+}
+
+.oom-post-pagination .jet-filters-pagination__link {
+    min-width: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.oom-post-pagination .jet-filters-pagination__item.prev-next  .jet-filters-pagination__link {
+	border-radius: 100%;
+	background: #00148C;
+	color: white;
+}
+.jet-search-filter.button-icon-position-left {
+    display: flex;
+    width: 300px;
+}
+button.jet-search-filter__submit.apply-filters__button {
+    margin: 0;
+}
+select.jet-sorting-select {
+    max-width: 250px !important;
+}
+@media(max-width: 767px){
+	.jet-search-filter.button-icon-position-left {
+		display: flex;
+		width: 200px;
+	}
+	select.jet-sorting-select {
+		max-width: 200px !important;
+	}
+}
+/* Single Blog - End */
+
+/* Comment - Start  */
+/* Container */
+.comments-area {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  font-family: "Segoe UI", Roboto, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Reply Title */
+.comment-reply-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Cancel reply link */
+#cancel-comment-reply-link {
+  font-size: 0.875rem;
+  color: #888;
+  margin-left: 1rem;
+}
+
+#cancel-comment-reply-link:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Logged-in message */
+.logged-in-as {
+  font-size: 0.9rem;
+  background: #eef2f7;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+/* Label and required mark */
+.comment-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.comment-form .required {
+  color: red;
+}
+
+/* Textarea */
+.comment-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 1rem;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.comment-form textarea:focus {
+  border-color: #0073aa;
+  outline: none;
+  background: #fff;
+}
+
+/* Submit button */
+.comment-form .form-submit input[type="submit"] {
+  background-color: #0073aa;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.comment-form .form-submit input[type="submit"]:hover {
+  background-color: #005177;
+}
+
+/* Misc spacing */
+.comment-form p {
+  margin-bottom: 1.25rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .comments-area {
+    padding: 1rem;
+  }
+
+  .comment-form textarea {
+    font-size: 0.95rem;
+  }
+}
+
+.elementor-widget-post-comments a {
+    color: #00148C !important;
+}
+
+#comments input#submit{ background: linear-gradient(90deg, #00148C, #00148C, #1478F0, #63F0C7); background-size: 300% auto; transition: .5s; &:hover { background-position: 99% 0; }}
+/* Comment - End */
+
+/* Terms of Use - Start */
+.oom-terms-of-use ul {
+    padding-left: 20px;
+}
+.oom-terms-of-use .elementor-widget-text-editor {
+    max-width: 95% !important;
+}
+.oom-terms-of-use details {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d3d3d3;
+    padding-top: 20px;
+}
+.oom-terms-of-use details:first-child {
+    padding-top: 0px;
+}
+
+/* Terms of Use - End  */
+
+/** Modal **/
+/* The Modal (background) */
+.oom-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+  }
+  
+/* Modal Content/Box */
+.oom-modal-content {
+	background-color: #fefefe;
+	margin: 10% auto; /* 15% from the top and centered */
+	padding: 0px 20px;
+	border: 1px solid #888;
+	width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.oom-close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.oom-close:hover,
+.oom-close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+  
+  
+
+/** Responsive **/
+@media (max-width: 1920px) {
+	
+}
+
+@media (max-width: 1440px) {
+	
+}
+
+
+@media (max-width: 1280px) {
+	
+}
+
+@media (max-width: 1024px) {
+    .oom-promotion-loop-content {
+        overflow: hidden;
+    }
+}
+
+/*
+ * Surface Pro
+ */
+@media (max-width: 912px) {
+	
+}
+
+/*
+ * iPad Air
+ */
+ @media (max-width: 820px) {
+	
+}
+
+/*
+ * iPad 9th
+ */
+@media (max-width: 810px) {
+	
+}
+
+/*
+ * iPad Mini
+ */
+@media (max-width: 768px) {
+
+    .oom-modal-content {
+        width: 80%;
+    }
+	.oom-form-widget select, .oom-form-widget input {
+		height: 47px!important;
+		min-height: 47px !important;
+	}
+	.oom-form-widget input[type="checkbox"] {
+		min-height: initial!important;
+		height: initial!important;
+	}
+}
+
+
+@media (max-width: 480px) {
+
+	.oom-modal-content {
+        width: 90%;
+    }
+	
+}
+
+@media (max-width: 414px) {
+	
+}
+
+@media (max-width: 375px) {
+	
+}
+
+
+@media (max-width: 360px) {
+
+}
+
+
+
+@media (max-width: 320px) {
+	
+}
+
+
+.oom-page-\<span\>Monthly.\&.Long-term.Rental\<\/span\> #daily-rental {
+    display: none;
+}
+
+.oom-page-\<span\>Daily\<\/span\> #monthly-rental {
+    display: none;
+}
+.oom-footer-social-icons ul {
+    row-gap: 10px;
+}
+
+.ui-datepicker-title, .ui-datepicker-calendar {
+    font-size: 16px !important;
+}

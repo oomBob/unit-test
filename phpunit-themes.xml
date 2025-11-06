@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PHPUnit configuration for running tests from wp-content/themes/ folder
+    
+    This configuration assumes:
+    wp-content/themes/
+    ├── hello-elementor-child/    (theme files)
+    ├── tests/                    (test files)
+    ├── vendor/                   (dependencies)
+    └── phpunit-themes.xml        (this file)
+    
+    Usage: ./vendor/bin/phpunit -c phpunit-themes.xml
+-->
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    beStrictAboutOutputDuringTests="false"
+    beStrictAboutTodoAnnotatedTests="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="false"
+    stopOnFailure="false"
+    executionOrder="depends,defects"
+    forceCoversAnnotation="false"
+    verbose="false">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>./tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">./hello-elementor-child</directory>
+        </include>
+        <exclude>
+            <directory>./hello-elementor-child/assets</directory>
+            <directory>./hello-elementor-child/template-parts</directory>
+            <file>./hello-elementor-child/style.css</file>
+            <file>./hello-elementor-child/functions.php</file>
+            <file>./hello-elementor-child/header.php</file>
+        </exclude>
+        <report>
+            <clover outputFile="coverage.xml"/>
+            <html outputDirectory="coverage"/>
+        </report>
+    </coverage>
+    <php>
+        <ini name="error_reporting" value="E_ALL"/>
+        <ini name="display_errors" value="0"/>
+        <ini name="display_startup_errors" value="0"/>
+        <ini name="html_errors" value="0"/>
+        <ini name="log_errors" value="1"/>
+        <ini name="output_buffering" value="0"/>
+    </php>
+</phpunit>
+

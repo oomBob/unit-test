@@ -1,0 +1,36 @@
+{
+    "name": "hello-elementor-child/unit-test",
+    "description": "Unit testing setup for Hello Elementor Child theme",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "yoast/phpunit-polyfills": "^1.0",
+        "brain/monkey": "^2.6",
+        "mockery/mockery": "^1.5",
+        "phpunit/php-code-coverage": "^9.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "HelloElementorChild\\Tests\\": "tests/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HelloElementorChild\\": "hello-elementor-child/"
+        }
+    },
+    "scripts": {
+        "test": "/opt/homebrew/Cellar/php@8.1/8.1.33/bin/php vendor/bin/phpunit --testdox",
+        "test-coverage": "/opt/homebrew/Cellar/php@8.1/8.1.33/bin/php vendor/bin/phpunit --coverage-html coverage --coverage-clover coverage.xml",
+        "test-coverage-text": "/opt/homebrew/Cellar/php@8.1/8.1.33/bin/php vendor/bin/phpunit --coverage-text --testdox"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
+
